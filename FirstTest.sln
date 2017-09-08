@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpWinApp", "CSharpWinAp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpWebMvc", "CSharpWebMvc\CSharpWebMvc.csproj", "{BCD09BFB-C153-43B8-B0CC-60053285F4F9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpUtils", "CSharpUtils\CSharpUtils.csproj", "{F1516BE4-A252-4A04-9028-3CED13B023F5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{BCD09BFB-C153-43B8-B0CC-60053285F4F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCD09BFB-C153-43B8-B0CC-60053285F4F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCD09BFB-C153-43B8-B0CC-60053285F4F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1516BE4-A252-4A04-9028-3CED13B023F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1516BE4-A252-4A04-9028-3CED13B023F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1516BE4-A252-4A04-9028-3CED13B023F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1516BE4-A252-4A04-9028-3CED13B023F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
