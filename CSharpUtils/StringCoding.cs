@@ -644,41 +644,6 @@ namespace CSharpUtils
             return Encoding.Default.GetString(ms.ToArray());
         }
         #endregion
-
-
-        public static Encoding ParseEncodingString(string codingString)
-        {
-            if (codingString == "ASCII")
-            {
-                return Encoding.ASCII;
-            }
-            else if (codingString == "BigEndianUnicode")
-            {
-                return Encoding.BigEndianUnicode;
-            }
-            else if (codingString == "Default")
-            {
-                return Encoding.Default;
-            }
-            else if (codingString == "Unicode")
-            {
-                return Encoding.Unicode;
-            }
-            else if (codingString == "UTF32")
-            {
-                return Encoding.UTF32;
-            }
-            else if (codingString == "UTF7")
-            {
-                return Encoding.UTF7;
-            }
-            else if (codingString == "UTF8")
-            {
-                return Encoding.UTF8;
-            }
-
-            return Encoding.Default;
-        }
-
+        
     }
 }

@@ -394,7 +394,7 @@ namespace CSharpUtils
         /// <returns>True/False</returns>
         public static bool IsDateTime(string strDate)
         {
-            return ValidateUtil.IsDateTime(strDate);
+            return RegexUtil.IsDateTime(strDate);
         }
     }
 }

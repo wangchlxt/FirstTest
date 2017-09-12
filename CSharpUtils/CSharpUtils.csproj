@@ -109,41 +109,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AuditStatus.cs" />
-    <Compile Include="BaseBusinessLogic.cs" />
-    <Compile Include="BaseRandom.cs" />
-    <Compile Include="BaseSortLogic.cs" />
-    <Compile Include="BaseSystemInfo.cs" />
-    <Compile Include="BaseUserInfo.cs" />
+    <Compile Include="ConvertUtil.cs" />
+    <Compile Include="RandomUtil.cs" />
     <Compile Include="CNStrUtil.cs" />
-    <Compile Include="Configuration\BaseConfiguration.cs" />
-    <Compile Include="Configuration\ConfigUtil.cs" />
-    <Compile Include="Configuration\ConfigurationCategory.cs" />
-    <Compile Include="Configuration\ConfigurationUtil.cs" />
-    <Compile Include="Configuration\DataBaseType.cs" />
-    <Compile Include="Configuration\IConfiguration.cs" />
     <Compile Include="Configuration\RegistryUtil.cs" />
-    <Compile Include="Configuration\RunMode.cs" />
     <Compile Include="Configuration\TableConfigUtil.cs" />
-    <Compile Include="Constant.cs" />
     <Compile Include="CRC16.cs" />
-    <Compile Include="DataBaseOperation.cs" />
     <Compile Include="DateTimeUtil.cs" />
     <Compile Include="DateUtil.cs" />
-    <Compile Include="DB\DbUtil.cs" />
-    <Compile Include="DB\DbUtilFactory.cs" />
-    <Compile Include="DB\DbProvider\BaseDbUtil.cs" />
-    <Compile Include="DB\DbProvider\IDbUtil.cs" />
-    <Compile Include="DB\DbProvider\IDbUtilExpand.cs" />
-    <Compile Include="DB\DbProvider\MySqlUtil.cs" />
-    <Compile Include="DB\DbProvider\OleDbUtil.cs" />
-    <Compile Include="DB\DbProvider\OracleUtil.cs" />
-    <Compile Include="DB\DbProvider\SqlUtil.cs" />
-    <Compile Include="DB\DbProvider\SqLiteHelper.cs" />
-    <Compile Include="DefaultRole.cs" />
     <Compile Include="DesktopUtil.cs" />
     <Compile Include="EnumUtil.cs" />
-    <Compile Include="Enums\BatchUpdateCardInfoType.cs" />
     <Compile Include="ExcelUtil.cs" />
     <Compile Include="Extensions\ByteExtensions.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
@@ -154,7 +129,7 @@
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="FileUtil.cs" />
-    <Compile Include="HttpUtil.cs" />
+    <Compile Include="Net\HttpUtil.cs" />
     <Compile Include="IdentityUtil.cs" />
     <Compile Include="ImageUtil.cs" />
     <Compile Include="IoC\InstanceMode.cs" />
@@ -165,34 +140,23 @@
     <Compile Include="Logger.cs" />
     <Compile Include="LogHelper.cs" />
     <Compile Include="LogUtil.cs" />
-    <Compile Include="MailUtil.cs" />
-    <Compile Include="MessageCategory.cs" />
-    <Compile Include="MessageFunction.cs" />
-    <Compile Include="MessageStateCode.cs" />
-    <Compile Include="MetarnetRegex.cs" />
+    <Compile Include="Net\MailUtil.cs" />
+    <Compile Include="RegexUtil.cs" />
     <Compile Include="Net\PortUtil.cs" />
     <Compile Include="NpoiExcelUtil.cs" />
-    <Compile Include="OperationCode.cs" />
-    <Compile Include="OperationResult.cs" />
-    <Compile Include="OperationResultType.cs" />
-    <Compile Include="OrganizeCategory.cs" />
-    <Compile Include="PermissionScope.cs" />
+    <Compile Include="Menus\OperationCode.cs" />
+    <Compile Include="Menus\OperationResultType.cs" />
     <Compile Include="PrincipalUtil.cs" />
-    <Compile Include="Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RequestUtil.cs" />
-    <Compile Include="ResourceManager\AppMessage.cs" />
+    <Compile Include="Net\RequestUtil.cs" />
     <Compile Include="ResourceManager\ResourceManager.cs" />
     <Compile Include="ResourceManager\ResourceManagerWrapper.cs" />
     <Compile Include="ResourceManager\Resources.cs" />
     <Compile Include="SecretUtil.cs" />
-    <Compile Include="SecurityUtil.cs" />
     <Compile Include="SerializationUtil.cs" />
-    <Compile Include="StatusCode.cs" />
+    <Compile Include="Menus\StatusCode.cs" />
     <Compile Include="StringCoding.cs" />
     <Compile Include="StringUtil.cs" />
-    <Compile Include="ValidateUtil.cs" />
-    <Compile Include="Validator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -203,6 +167,7 @@
   <ItemGroup>
     <Content Include="ResourceManager\Sample.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.105.2\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.105.2\build\net46\System.Data.SQLite.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
