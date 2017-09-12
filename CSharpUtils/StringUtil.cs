@@ -90,7 +90,7 @@ namespace CSharpUtils
         public static string GetSearchString(string searchValue, bool allLike = false)
         {
             searchValue = searchValue.Trim();
-            searchValue = SecretUtil.SqlSafe(searchValue);
+            searchValue = searchValue.Replace(@"''", @"'");
             if (searchValue.Length > 0)
             {
                 searchValue = searchValue.Replace('[', '_');

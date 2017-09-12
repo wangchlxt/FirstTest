@@ -6,29 +6,7 @@ using System;
 
 namespace CSharpUtils
 {
-	/// <summary>
-    /// BaseRandom
-	/// 产生随机数
-	/// 
-	/// 随机数管理，最大值、最小值可以自己进行设定。
-	/// 
-    /// 修改纪录
-    /// 
-    ///     2009.07.08 版本：3.0 JiRiGaLa	更新完善程序，将方法修改为静态方法。
-    ///		2007.06.30 版本：3.2 JiRiGaLa   产生随机字符。
-    ///		2006.02.05 版本：3.1 JiRiGaLa   重新调整主键的规范化。
-    ///		2004.11.12 版本：3.0 JiRiGaLa   最后修改，改进成以后可以扩展到多种数据库的结构形式。
-    ///	    2004.11.12 版本：3.0 JiRiGaLa   一些方法改进，主键格式优化，基本上看上去还过得去了。
-    ///     2005.03.07 版本：2.0 JiRiGaLa   2005.03.07 更新程序排版。
-    ///     2005.08.13 版本：1.0 JiRiGaLa   参数格式标准化。
-    ///     
-    /// 版本：3.2
-	/// <author>
-
-    ///		<date>2007.06.30</date>
-	/// </author> 
-	/// </summary>
-	public class BaseRandom
+	public class RandomUtil
 	{
 		public static int Minimum = 100000;
         public static int Maximal = 999999;

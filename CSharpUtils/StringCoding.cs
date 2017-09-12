@@ -57,13 +57,12 @@ namespace CSharpUtils
             }
             return result;
         }
-
-
+        
         #endregion (1) QueryString 加密与解密
         
         #region ( 2 ) Rijndael算法
-        private static SymmetricAlgorithm mobjCryptoService = new RijndaelManaged();
 
+        private static SymmetricAlgorithm mobjCryptoService = new RijndaelManaged();
         private static string Key = "Guz(%&hj7x89H$yuBI0456FtmaT5&fvHUFCy76*h%(HilJ$lhj!y6&(*jkP87jH7";
 
         /// <summary>
@@ -82,6 +81,7 @@ namespace CSharpUtils
                 sTemp = sTemp.PadRight(KeyLength, ' ');
             return ASCIIEncoding.ASCII.GetBytes(sTemp);
         }
+
         /// <summary>
         /// 获得初始向量IV Rijndael算法
         /// </summary>
@@ -100,7 +100,7 @@ namespace CSharpUtils
         }
 
         /// <summary>
-        /// 加密方法 Rijndael算法
+        /// 加密方法 Rijndael 算法
         /// </summary>
         /// <param name="Source">待加密的串</param>
         /// <returns>经过加密的串</returns>
@@ -120,7 +120,7 @@ namespace CSharpUtils
         }
 
         /// <summary>
-        /// 解密方法 Rijndael算法
+        /// 解密方法 Rijndael 算法
         /// </summary>
         /// <param name="Source">待解密的串</param>
         /// <returns>经过解密的串</returns>
@@ -144,7 +144,7 @@ namespace CSharpUtils
         }
         #endregion
         
-        #region ( 3 ) Base64与UTF8混用
+        #region ( 3 ) Base64 与 UTF8 混用
 
         //字符串加密
         public string BUEncrypt(string bb)
@@ -298,11 +298,11 @@ namespace CSharpUtils
         /// 加密密码MD5T和SHA1
         /// </summary>
         /// <param name="strSource">字符串</param>
-        /// <param name="strFlag">加密类别</param>
-        /// <param name="substringlen">加密长度</param>
+        /// <param name="strFlag">加密类别：1.MD5 2.SHA1</param>
+        /// <param name="substringlen">加密长度：16,32</param>
         /// <returns></returns>
         /// 
-        public string encrypting(string strSource, int strFlag, int substringlen)
+        public string Encrypting(string strSource, int strFlag, int substringlen)
         {
             string ss = "";
             if (strFlag == 1)///MD5加密
@@ -310,6 +310,7 @@ namespace CSharpUtils
                 if (substringlen == 16)//16位MD5加密（取32位加密的9~25字符）
                 {
                     ss = FormsAuthentication.HashPasswordForStoringInConfigFile(strSource, "MD5").ToLower().Substring(8, 16);
+
                 }
                 else if (substringlen == 32)//32位加密
                 {
@@ -368,5 +369,316 @@ namespace CSharpUtils
 
             return appkey;
         }
+
+        #region MD5 加密
+        /// <summary>
+        /// MD5 加密
+        /// </summary>
+        /// <param name="content"></param>
+        /// <returns></returns>
+        public static string EncodeMD5(string content)
+        {
+            MD5 md5 = new MD5CryptoServiceProvider();
+
+            byte[] buffer = md5.ComputeHash(Encoding.UTF8.GetBytes(content));
+
+            StringBuilder buider = new StringBuilder();
+
+            for (int i = 0; i < buffer.Length; i++)
+            {
+                buider.Append(buffer[i].ToString("X2"));
+            }
+
+            return buider.ToString();
+        }
+        #endregion
+
+        #region 16位 MD5 加密
+        /// <summary>
+        /// 16位MD5加密
+        /// </summary>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public static string EncodeMD5Encrypt16(string password)
+        {
+            var md5 = new MD5CryptoServiceProvider();
+            string t2 = BitConverter.ToString(md5.ComputeHash(Encoding.Default.GetBytes(password)), 4, 8);
+            t2 = t2.Replace("-", "");
+            return t2;
+        }
+
+        #endregion
+
+        #region 32位MD5加密
+        /// <summary>
+        /// 32位MD5加密
+        /// </summary>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public static string EncodeMD5Encrypt32(string password)
+        {
+            string cl = password;
+            string pwd = "";
+            MD5 md5 = MD5.Create(); //实例化一个md5对像
+            // 加密后是一个字节类型的数组，这里要注意编码UTF8/Unicode等的选择　
+            byte[] s = md5.ComputeHash(Encoding.UTF8.GetBytes(cl));
+            // 通过使用循环，将字节类型的数组转换为字符串，此字符串是常规字符格式化所得
+            for (int i = 0; i < s.Length; i++)
+            {
+                // 将得到的字符串使用十六进制类型格式。格式后的字符是小写的字母，如果使用大写（X）则格式后的字符是大写字符 
+                pwd = pwd + s[i].ToString("X");
+            }
+            return pwd;
+        }
+        #endregion
+
+        #region Hmacsha1
+        /// <summary>
+        /// Hmacsha1 加密
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="content"></param>
+        /// <returns></returns>
+        public static string Hmacsha1(string key, string content)
+        {
+            HMACSHA1 hmacsha1 = new HMACSHA1();
+            hmacsha1.Key = Encoding.UTF8.GetBytes(key);
+            byte[] buffer = System.Text.Encoding.UTF8.GetBytes(content);
+            byte[] bytes = hmacsha1.ComputeHash(buffer);
+            return Convert.ToBase64String(bytes);
+        }
+        #endregion
+
+        #region 实现Base64加密解密
+        /// <summary> 
+        /// Base64加密 
+        /// </summary> 
+        /// <param name="codeName">加密采用的编码方式</param> 
+        /// <param name="source">待加密的明文</param> 
+        /// <returns></returns> 
+        public static string EncodeBase64(Encoding encoding, string source)
+        {
+            string encode = "";
+            byte[] bytes = encoding.GetBytes(source);
+            try
+            {
+                encode = Convert.ToBase64String(bytes);
+            }
+            catch
+            {
+                encode = source;
+            }
+            return encode;
+        }
+
+        /// <summary> 
+        /// Base64加密，采用utf8编码方式加密 
+        /// </summary> 
+        /// <param name="source">待加密的明文</param> 
+        /// <returns>加密后的字符串</returns> 
+        public static string EncodeBase64(string source)
+        {
+            return EncodeBase64(Encoding.UTF8, source);
+        }
+
+        /// <summary> 
+        /// Base64解密 
+        /// </summary> 
+        /// <param name="codeName">解密采用的编码方式，注意和加密时采用的方式一致</param> 
+        /// <param name="result">待解密的密文</param> 
+        /// <returns>解密后的字符串</returns> 
+        public static string DecodeBase64(Encoding encode, string result)
+        {
+            string decode = "";
+            byte[] bytes = Convert.FromBase64String(result);
+            try
+            {
+                decode = encode.GetString(bytes);
+            }
+            catch
+            {
+                decode = result;
+            }
+            return decode;
+        }
+
+        /// <summary> 
+        /// Base64解密，采用utf8编码方式解密 
+        /// </summary> 
+        /// <param name="result">待解密的密文</param> 
+        /// <returns>解密后的字符串</returns> 
+        public static string DecodeBase64(string result)
+        {
+            return DecodeBase64(Encoding.UTF8, result);
+        }
+        #endregion
+
+
+        /// <summary>  
+        /// SHA1 加密，返回大写字符串  
+        /// </summary>  
+        /// <param name="content">需要加密字符串</param>  
+        /// <returns>返回40位UTF8 大写</returns>  
+        public static string SHA1(string content)
+        {
+            return SHA1(content, Encoding.UTF8);
+        }
+        /// <summary>  
+        /// SHA1 加密，返回大写字符串  
+        /// </summary>  
+        /// <param name="content">需要加密字符串</param>  
+        /// <param name="encode">指定加密编码</param>  
+        /// <returns>返回40位大写字符串</returns>  
+        public static string SHA1(string content, Encoding encode)
+        {
+            try
+            {
+                SHA1 sha1 = new SHA1CryptoServiceProvider();
+                byte[] bytes_in = encode.GetBytes(content);
+                byte[] bytes_out = sha1.ComputeHash(bytes_in);
+                sha1.Dispose();
+                string result = BitConverter.ToString(bytes_out);
+                result = result.Replace("-", "");
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("SHA1加密出错：" + ex.Message);
+            }
+        }
+
+
+        #region DES 加解密
+        /// <summary>
+        /// DES数据加密
+        /// </summary>
+        /// <param name="targetValue">目标字段</param>
+        /// <returns>加密</returns>
+        public static string Encrypt(string targetValue)
+        {
+            return Encrypt(targetValue, "DotNetKey");
+        }
+
+        /// <summary>
+        /// DES数据加密
+        /// </summary>
+        /// <param name="targetValue">目标值</param>
+        /// <param name="key">密钥</param>
+        /// <returns>加密值</returns>
+        public static string Encrypt(string targetValue, string key)
+        {
+            if (string.IsNullOrEmpty(targetValue))
+            {
+                return string.Empty;
+            }
+
+            var returnValue = new StringBuilder();
+            var des = new DESCryptoServiceProvider();
+            byte[] inputByteArray = Encoding.Default.GetBytes(targetValue);
+            // 通过两次哈希密码设置对称算法的初始化向量   
+            des.Key = Encoding.ASCII.GetBytes(FormsAuthentication.HashPasswordForStoringInConfigFile
+                                                  (FormsAuthentication.HashPasswordForStoringInConfigFile(key, "md5").
+                                                       Substring(0, 8), "sha1").Substring(0, 8));
+            // 通过两次哈希密码设置算法的机密密钥   
+            des.IV = Encoding.ASCII.GetBytes(FormsAuthentication.HashPasswordForStoringInConfigFile
+                                                 (FormsAuthentication.HashPasswordForStoringInConfigFile(key, "md5")
+                                                      .Substring(0, 8), "md5").Substring(0, 8));
+            var ms = new MemoryStream();
+            var cs = new CryptoStream(ms, des.CreateEncryptor(), CryptoStreamMode.Write);
+            cs.Write(inputByteArray, 0, inputByteArray.Length);
+            cs.FlushFinalBlock();
+            foreach (byte b in ms.ToArray())
+            {
+                returnValue.AppendFormat("{0:X2}", b);
+            }
+            return returnValue.ToString();
+        }
+
+
+        /// <summary>
+        /// DES数据解密
+        /// </summary>
+        /// <param name="targetValue">目标字段</param>
+        /// <returns>解密</returns>
+        public static string Decrypt(string targetValue)
+        {
+            return Decrypt(targetValue, "DotNetKey");
+        }
+
+        /// <summary>
+        /// DES数据解密
+        /// </summary>
+        /// <param name="targetValue"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public static string Decrypt(string targetValue, string key)
+        {
+            if (string.IsNullOrEmpty(targetValue))
+            {
+                return string.Empty;
+            }
+            // 定义DES加密对象
+            var des = new DESCryptoServiceProvider();
+            int len = targetValue.Length / 2;
+            var inputByteArray = new byte[len];
+            int x, i;
+            for (x = 0; x < len; x++)
+            {
+                i = Convert.ToInt32(targetValue.Substring(x * 2, 2), 16);
+                inputByteArray[x] = (byte)i;
+            }
+            // 通过两次哈希密码设置对称算法的初始化向量   
+            des.Key = Encoding.ASCII.GetBytes(FormsAuthentication.HashPasswordForStoringInConfigFile
+                                                  (FormsAuthentication.HashPasswordForStoringInConfigFile(key, "md5").
+                                                       Substring(0, 8), "sha1").Substring(0, 8));
+            // 通过两次哈希密码设置算法的机密密钥   
+            des.IV = Encoding.ASCII.GetBytes(FormsAuthentication.HashPasswordForStoringInConfigFile
+                                                 (FormsAuthentication.HashPasswordForStoringInConfigFile(key, "md5")
+                                                      .Substring(0, 8), "md5").Substring(0, 8));
+            // 定义内存流
+            var ms = new MemoryStream();
+            // 定义加密流
+            var cs = new CryptoStream(ms, des.CreateDecryptor(), CryptoStreamMode.Write);
+            cs.Write(inputByteArray, 0, inputByteArray.Length);
+            cs.FlushFinalBlock();
+            return Encoding.Default.GetString(ms.ToArray());
+        }
+        #endregion
+
+
+        public static Encoding ParseEncodingString(string codingString)
+        {
+            if (codingString == "ASCII")
+            {
+                return Encoding.ASCII;
+            }
+            else if (codingString == "BigEndianUnicode")
+            {
+                return Encoding.BigEndianUnicode;
+            }
+            else if (codingString == "Default")
+            {
+                return Encoding.Default;
+            }
+            else if (codingString == "Unicode")
+            {
+                return Encoding.Unicode;
+            }
+            else if (codingString == "UTF32")
+            {
+                return Encoding.UTF32;
+            }
+            else if (codingString == "UTF7")
+            {
+                return Encoding.UTF7;
+            }
+            else if (codingString == "UTF8")
+            {
+                return Encoding.UTF8;
+            }
+
+            return Encoding.Default;
+        }
+
     }
 }

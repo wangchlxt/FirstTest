@@ -2,24 +2,11 @@
 // All Rights Reserved , Copyright (C) 2010 , Jirisoft , Ltd. 
 //------------------------------------------------------------
 
-namespace CSharpUtils
+namespace CSharpUtils.Menus
 {
-    #region public public enum OperationCode 权限枚举类型
     /// <summary>
-    /// 权限枚举类型
-    /// 
-    /// 修改记录
-    ///
-    ///		2008.05.10 版本：1.1 JiRiGaLa 命名为 OperationCode。 
-    ///		2007.12.08 版本：1.0 JiRiGaLa 添加 Config、UpLoad、DownLoad 权限。 
-    ///		
-    /// 版本：1.0
-    ///
-    /// <author>
-
-    ///		<date>2007.12.08</date>
-    /// </author> 
-    /// </remarks>
+    /// 操作权限
+    /// </summary>
     public enum OperationCode
     {
         Access = 1,     // 访问权限
@@ -37,5 +24,4 @@ namespace CSharpUtils
         UpLoad = 13,    // 上传权限
         DownLoad = 14   // 下载权限
     }
-    #endregion
 }

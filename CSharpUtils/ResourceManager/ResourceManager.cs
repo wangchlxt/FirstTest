@@ -9,20 +9,6 @@ using System.IO;
 
 namespace CSharpUtils.ResourceManager
 {
-    /// <summary>
-    /// ResourceManager
-    /// 资源管理器
-    /// 
-    ///	修改纪录
-    ///		2007.05.16 版本：1.0 JiRiGaLa	重新调整主键的规范化。
-    /// 
-    /// 版本：1.0
-    /// 
-    /// <author>
-
-    ///		<date>2007.05.16</date>
-    /// </author> 
-    /// </summary>
     public class ResourceManager
     {
         private volatile static ResourceManager instance = null;

@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <resources>
-  <language>en-us</language>
-  <displayName>American English</displayName>
-  <version>1.0</version>
-  <author>JiRiGaLa</author>
+  <language></language>
+  <displayName></displayName>
+  <version></version>
+  <author></author>
   <description></description>
   <items>
-    <item key="module_page_g_lbl1">name</item>
-    <item key="module_page_g_lbl2">pass</item>
+    <item key="module_page_g_lbl1"></item>
+    <item key="module_page_g_lbl2"></item>
   </items>
 </resources>

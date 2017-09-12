@@ -170,6 +170,7 @@
     <Compile Include="MessageFunction.cs" />
     <Compile Include="MessageStateCode.cs" />
     <Compile Include="MetarnetRegex.cs" />
+    <Compile Include="Net\PortUtil.cs" />
     <Compile Include="NpoiExcelUtil.cs" />
     <Compile Include="OperationCode.cs" />
     <Compile Include="OperationResult.cs" />

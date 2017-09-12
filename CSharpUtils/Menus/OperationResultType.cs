@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel;
 
-namespace CSharpUtils
+namespace CSharpUtils.Menus
 {
     /// <summary>
-    /// 表示业务操作结果的枚举
+    /// 业务操作结果
     /// </summary>
     [Description( "业务操作结果的枚举" )]
     public enum OperationResultType

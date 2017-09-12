@@ -15,20 +15,6 @@ using System.Web.UI.HtmlControls;
 
 namespace CSharpUtils.ResourceManager
 {
-    /// <summary>
-    /// ResourceManagerWrapper
-    /// 资源管理器
-    /// 
-    ///	修改纪录
-    ///		2007.05.16 版本：1.0 JiRiGaLa	重新调整主键的规范化。
-    /// 
-    /// 版本：1.0
-    /// 
-    /// <author>
-
-    ///		<date>2007.05.16</date>
-    /// </author> 
-    /// </summary>
     public class ResourceManagerWrapper
     {
         private volatile static ResourceManagerWrapper instance = null;
@@ -66,26 +52,14 @@ namespace CSharpUtils.ResourceManager
 
         public string Get(string key)
         {
-            return resourceManager.Get(BaseSystemInfo.CurrentLanguage, key);
+            return resourceManager.Get("", key);
         }
 
         public string Get(string language, string key)
         {
             return resourceManager.Get(language, key);
         }
-
-        public string Get(BaseUserInfo userInfo, string key)
-        {
-            if ((userInfo == null) || (String.IsNullOrEmpty(userInfo.CurrentLanguage)))
-            {
-                return resourceManager.Get(BaseSystemInfo.CurrentLanguage, key);
-            }
-            else
-            {
-                return resourceManager.Get(userInfo.CurrentLanguage, key);
-            }
-        }
-
+        
         public Hashtable GetLanguages()
         {
             return resourceManager.GetLanguages();

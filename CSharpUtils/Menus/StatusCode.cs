@@ -2,25 +2,11 @@
 // All Rights Reserved , Copyright (C) 2010 , Jirisoft , Ltd. 
 //------------------------------------------------------------
 
-namespace CSharpUtils
+namespace CSharpUtils.Menus
 {
     /// <summary>
-    /// StateCode
-    /// 程序运行状态。
-    /// 
-    /// 修改纪录
-    /// 
-    ///		2007.12.09 版本：1.1 JiRiGaLa 重新命名为 StatusCode。
-    ///		2007.12.04 版本：1.0 JiRiGaLa 重新调整主键的规范化。
-    ///		
-    /// 版本：1.0
-    /// 
-    /// <author>
-
-    ///		<date>2007.05.18</date>
-    /// </author> 
-    /// </summary>    
-    #region public enum StatusCode 程序运行状态
+    /// 程序运行状态
+    /// </summary>
     public enum StatusCode
     {
         Error = 0,                  //  0 发生错误。
@@ -55,6 +41,5 @@ namespace CSharpUtils
         UserNotActive = 29,         // 29 用户还未被激活。
         UserIsActivate = 30,        // 30 用户已被激活，不用重复激活。
     }
-    #endregion
 }
 

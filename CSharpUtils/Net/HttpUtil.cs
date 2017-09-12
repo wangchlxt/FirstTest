@@ -5,7 +5,7 @@ using System.Text;
 using System.Net;
 using System.IO;
 
-namespace CSharpUtils
+namespace CSharpUtils.Net
 {
     public class HttpUtil
     {

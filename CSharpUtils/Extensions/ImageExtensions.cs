@@ -25,21 +25,7 @@ namespace System.Drawing
         {
             return false;
         }
-
-        /// <summary>
-        /// 生成缩略图
-        /// </summary>
-        /// <param name="image">源图像对象</param>
-        /// <param name="width">目标图像宽度</param>
-        /// <param name="height">目标图像高度</param>
-        /// <returns>缩略图</returns>
-        //public static Image GetThumbImage( this Image image, int width, int height )
-        //{
-        //    Image.GetThumbnailImageAbort callback = new Image.GetThumbnailImageAbort( () => { return false; } );
-
-        //    return image.GetThumbnailImage( width, height, callback, IntPtr.Zero );
-        //}
-
+        
         /// <summary>   
         /// 生成缩略图重载方法，将缩略图文件保存到指定的路径   
         /// </summary>   
