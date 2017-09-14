@@ -110,6 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConvertUtil.cs" />
+    <Compile Include="Net\DnsUtil.cs" />
     <Compile Include="RandomUtil.cs" />
     <Compile Include="CNStrUtil.cs" />
     <Compile Include="Configuration\RegistryUtil.cs" />
