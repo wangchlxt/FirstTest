@@ -11,7 +11,7 @@ namespace CSharpConsoleApp
 
         static void Main(string[] args)
         {
-            ParallelTest.Test();
+            StringTest.Test();
         }
     }
 }

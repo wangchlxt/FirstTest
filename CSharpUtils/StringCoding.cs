@@ -16,7 +16,7 @@ namespace CSharpUtils
         /// </summary>
         /// <param name="sourceString">要加密的字符串</param>
         /// <returns></returns>
-        public string EncodeQueryString(string sourceString)
+        public static string EncodeQueryString(string sourceString)
         {
             if(string.IsNullOrEmpty(sourceString))
             {
@@ -31,7 +31,7 @@ namespace CSharpUtils
         /// </summary>
         /// <param name="sourceString">要解密的字符串</param>
         /// <returns></returns>
-        public string DecodeQueryString(string sourceString)
+        public static string DecodeQueryString(string sourceString)
         {
             if(string.IsNullOrEmpty(sourceString))
             {
@@ -52,7 +52,7 @@ namespace CSharpUtils
         /// 获得密钥 Rijndael算法
         /// </summary>
         /// <returns>密钥</returns>
-        private byte[] GetLegalKey()
+        private static byte[] GetLegalKey()
         {
             string sTemp = Key;
             mobjCryptoService.GenerateKey();
@@ -69,7 +69,7 @@ namespace CSharpUtils
         /// 获得初始向量IV Rijndael算法
         /// </summary>
         /// <returns>初试向量IV</returns>
-        private byte[] GetLegalIV()
+        private static byte[] GetLegalIV()
         {
             string sTemp = "E4ghj*Ghg7!rNIfb&95GUY86GfghUb#er57HBh(u%g6HJ($jhWk7&!hg4ui%$hjk";
             mobjCryptoService.GenerateIV();
@@ -87,7 +87,7 @@ namespace CSharpUtils
         /// </summary>
         /// <param name="sourceString">要加密的字符串</param>
         /// <returns>经过加密的串</returns>
-        public string EncodeRijndael(string sourceString)
+        public static string EncodeRijndael(string sourceString)
         {
             byte[] bytIn = UTF8Encoding.UTF8.GetBytes(sourceString);
             MemoryStream ms = new MemoryStream();
@@ -107,7 +107,7 @@ namespace CSharpUtils
         /// </summary>
         /// <param name="sourceString">要解密的字符串</param>
         /// <returns>经过解密的串</returns>
-        public string DecodeRijndael(string sourceString)
+        public static string DecodeRijndael(string sourceString)
         {
             try
             {
@@ -165,7 +165,7 @@ namespace CSharpUtils
         /// </summary>
         /// <param name="sourceString">要加密的字符串</param>
         /// <returns></returns>
-        public string EncodeSKey(string sourceString)
+        public static string EncodeSKey(string sourceString)
         {
             try
             {
@@ -189,7 +189,7 @@ namespace CSharpUtils
         /// </summary>
         /// <param name="sourceString">要解密的字符串</param>
         /// <returns></returns>
-        public string DecodeSKeyDecrypt(string sourceString)
+        public static string DecodeSKeyDecrypt(string sourceString)
         {
             Byte[] inputByteArray = new byte[sourceString.Length];
             try
@@ -218,7 +218,7 @@ namespace CSharpUtils
         /// <param name="sourceString">要加密的字符串。</param>
         /// <param name="key">密钥，且必须为8位。</param>
         /// <returns>以Base64格式返回的加密字符串。</returns>
-        public string EncodeDES(string sourceString, string key)
+        public static string EncodeDES(string sourceString, string key)
         {
             using (DESCryptoServiceProvider des = new DESCryptoServiceProvider())
             {
@@ -244,7 +244,7 @@ namespace CSharpUtils
         /// <param name="sourceString">要解密的以Base64</param>
         /// <param name="key">密钥，且必须为8位</param>
         /// <returns>已解密的字符串</returns>
-        public string DecodeDES(string sourceString, string key)
+        public static string DecodeDES(string sourceString, string key)
         {
             byte[] inputByteArray = Convert.FromBase64String(sourceString);
             using (DESCryptoServiceProvider des = new DESCryptoServiceProvider())
@@ -286,39 +286,34 @@ namespace CSharpUtils
 
             return buider.ToString();
         }
-        
+
         /// <summary>
-        /// 16位MD5加密
+        /// 字符串加密 16位MD5算法
         /// </summary>
-        /// <param name="password"></param>
+        /// <param name="sourceString"></param>
         /// <returns></returns>
-        public static string EncodeMD5Encrypt16(string password)
+        public static string EncodeMD5Encrypt16(string sourceString)
         {
-            var md5 = new MD5CryptoServiceProvider();
-            string t2 = BitConverter.ToString(md5.ComputeHash(Encoding.Default.GetBytes(password)), 4, 8);
-            t2 = t2.Replace("-", "");
-            return t2;
+            return BitConverter.ToString(new MD5CryptoServiceProvider().ComputeHash(Encoding.UTF8.GetBytes(sourceString)), 4, 8).Replace("-","");
         }
-        
+
         /// <summary>
-        /// 32位MD5加密
+        /// 字符串加密 32位MD5算法
         /// </summary>
-        /// <param name="password"></param>
+        /// <param name="sourceString">要加密的字符串</param>
         /// <returns></returns>
-        public static string EncodeMD5Encrypt32(string password)
+        public static string EncodeMD5Encrypt32(string sourceString)
         {
-            string cl = password;
-            string pwd = "";
-            MD5 md5 = MD5.Create(); //实例化一个md5对像
+            byte[] buffer = MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(sourceString));
             
-            byte[] s = md5.ComputeHash(Encoding.UTF8.GetBytes(cl));
-            
-            for (int i = 0; i < s.Length; i++)
+            StringBuilder buider = new StringBuilder();
+
+            for (int i = 0; i < buffer.Length; i++)
             {
-                pwd = pwd + s[i].ToString("X");
+                buider.Append(buffer[i].ToString("X2"));
             }
 
-            return pwd;
+            return buider.ToString();
         }
 
         #endregion

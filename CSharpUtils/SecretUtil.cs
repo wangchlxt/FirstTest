@@ -23,7 +23,7 @@ namespace CSharpUtils
             // 2:读取证书文件
             string digitalSignature = FileUtil.ReadBinaryFile(digitalSignatureFile);
             // 3:解密文件
-            string xmlFile = StringCoding.Decrypt(digitalSignature);
+            string xmlFile = StringCoding.DecodeDES(digitalSignature, "DotNetKey");
             // 4:按XML文件读取
             XmlDocument xmlDocument = new XmlDocument();
             xmlDocument.LoadXml(xmlFile);
@@ -49,7 +49,7 @@ namespace CSharpUtils
             // 2:读取证书文件
             string digitalSignature = FileUtil.ReadBinaryFile(digitalSignatureFile);
             // 3:解密文件
-            string xmlFile = StringCoding.Decrypt(digitalSignature);
+            string xmlFile = StringCoding.DecodeDES(digitalSignature, "DotNetKey");
             // 4:按XML文件读取
             XmlDocument xmlDocument = new XmlDocument();
             xmlDocument.LoadXml(xmlFile);
