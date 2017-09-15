@@ -84,6 +84,7 @@ namespace CSharpUtils.Net
             }
             catch (Exception ex)
             {
+                LogHelper.Error(String.Format("GetWebRequest {0}{1}{2} 异常", getUrl, paramData, dataEncode), ex);
                 return string.Empty;
             }
             finally
@@ -186,6 +187,7 @@ namespace CSharpUtils.Net
             }
             catch(Exception ex)
             {
+                LogHelper.Error(String.Format("HttpPost {0}{1} 异常", url, postDataStr), ex);
                 return string.Empty;
             }
         }
@@ -230,8 +232,9 @@ namespace CSharpUtils.Net
                 string content = reader.ReadToEnd();
                 return content;
             }
-            catch
+            catch(Exception ex)
             {
+                LogHelper.Error(String.Format("HttpPost {0} 异常", url), ex);
                 return string.Empty;
             }
         }
@@ -267,6 +270,7 @@ namespace CSharpUtils.Net
             }
             catch (Exception ex)
             {
+                LogHelper.Error(String.Format("HttpGet {0}{1} 异常", getUrl, paramData), ex);
                 return string.Empty;
             }
             finally

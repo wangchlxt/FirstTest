@@ -48,8 +48,9 @@ namespace System.Drawing
 
                 return true;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
+                CSharpUtils.LogHelper.Error(String.Format("GetReducedImage {0} {1} {2} 异常", Width, Height, targetFilePath), ex);
                 return false;
             }
         }

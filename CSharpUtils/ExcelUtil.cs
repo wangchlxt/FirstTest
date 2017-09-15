@@ -59,7 +59,7 @@ namespace CSharpUtils
             }
             catch (Exception ex)
             {
-
+                LogHelper.Error(String.Format("ExportExcel 异常"), ex);
             }
         }
 
@@ -109,6 +109,7 @@ namespace CSharpUtils
             }
             catch (Exception ex)
             {
+                LogHelper.Error(String.Format("ExcelToDataSet {0}  {1}  异常", sheet, filename), ex);
                 return null;
             }
         }
