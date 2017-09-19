@@ -31,7 +31,7 @@ namespace CSharpConsoleApp
 
             Console.WriteLine(sb.ToString());
 
-            string codeString = StringCoding.SHA1(sb.ToString());
+            string codeString = StringCoding.EncodeSHA1(sb.ToString());
             Console.WriteLine(codeString);
 
             Console.Read();

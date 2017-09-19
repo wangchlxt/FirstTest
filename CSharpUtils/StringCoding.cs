@@ -325,7 +325,7 @@ namespace CSharpUtils
         /// <param name="key"></param>
         /// <param name="content"></param>
         /// <returns></returns>
-        public static string Hmacsha1(string key, string content)
+        public static string EncodeHmacsha1(string key, string content)
         {
             HMACSHA1 hmacsha1 = new HMACSHA1();
             hmacsha1.Key = Encoding.UTF8.GetBytes(key);
@@ -335,17 +335,14 @@ namespace CSharpUtils
         }
         #endregion
         
-        
-
-
         /// <summary>  
         /// SHA1 加密，返回大写字符串  
         /// </summary>  
         /// <param name="content">需要加密字符串</param>  
         /// <returns>返回40位UTF8 大写</returns>  
-        public static string SHA1(string content)
+        public static string EncodeSHA1(string content)
         {
-            return SHA1(content, Encoding.UTF8);
+            return EncodeSHA1(content, Encoding.UTF8);
         }
         /// <summary>  
         /// SHA1 加密，返回大写字符串  
@@ -353,7 +350,7 @@ namespace CSharpUtils
         /// <param name="content">需要加密字符串</param>  
         /// <param name="encode">指定加密编码</param>  
         /// <returns>返回40位大写字符串</returns>  
-        public static string SHA1(string content, Encoding encode)
+        public static string EncodeSHA1(string content, Encoding encode)
         {
             try
             {
