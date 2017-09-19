@@ -328,6 +328,25 @@ namespace CSharpUtils
             }
             return returnValue;
         }
-        
+
+        /// <summary>
+        /// 生成随机字符串，随机串包含字母或数字
+        /// </summary>
+        /// <returns></returns>
+        public static string GenerateNonceStr()
+        {
+            return Guid.NewGuid().ToString().Replace("-", "");
+        }
+
+        /// <summary>
+        /// 根据当前系统时间加随机序列生成随机字符串
+        /// </summary>
+        /// <param name="prefix"></param>
+        /// <returns></returns>
+        public static string GenerateOutTradeNo(string prefix)
+        {
+            var ran = new Random();
+            return string.Format("{0}{1}{2}", prefix, DateTime.Now.ToString("yyyyMMddHHmmss"), ran.Next(999));
+        }
     }
 }

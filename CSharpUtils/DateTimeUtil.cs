@@ -15,9 +15,7 @@ namespace CSharpUtils
         public static ulong GetTimestamp()
         {
             TimeSpan ts = DateTime.UtcNow - new DateTime( 1970, 1, 1, 0, 0, 0, 0 );
-
-            // return (ulong)ts.TotalMilliseconds;
-            return (ulong)ts.TotalSeconds;//.TotalMilliseconds;
+            return (ulong)ts.TotalSeconds;
         }
 
         /// <summary>
