@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CSharpUtils;
 
 namespace CSharpConsoleApp
 {
@@ -16,6 +17,11 @@ namespace CSharpConsoleApp
             Console.WriteLine(String.Format("{0} - {1} {2}", two, one, two.StartsWith(one)));
             Console.WriteLine(String.Format("{0} - {1} {2}", one, two, one.StartsWith(two)));
             Console.WriteLine(String.Format("{0} - 10 {1}", two, two.StartsWith("10")));
+
+            Console.WriteLine("随机字符串：");
+            Console.WriteLine(StringUtil.GenerateRandomStr());
+            Console.WriteLine(StringUtil.GenerateRandomStr(DateTime.Now.ToString()));
+
             Console.Read();
         }
     }

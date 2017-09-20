@@ -8,10 +8,9 @@ namespace CSharpConsoleApp
 {
     class Program
     {
-
         static void Main(string[] args)
         {
-            SignTest.Test();
+            WxPayData.Test();
         }
     }
 }
