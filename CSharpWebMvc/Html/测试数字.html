@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>测试数字</title>
+</head>
+<body>
+    <input type="text" id="num" />
+    <input type="button" value="parseInt" onclick="myParseInt()"/>
+    <input type="button" value="isNaN" onclick="myIsNaN()" />
+
+    <br/>
+    <input type="text" id="regexVal"/>
+    <input type="button" value="调用" onclick="myRegex()"/>
+    
+    <div id="tip" style="margin-top:20px;color:red;"></div>
+
+    <div style="margin-top:20px;">
+<pre>
+        "^\\d+$"　　//非负整数（正整数 + 0）
+        "^[0-9]*[1-9][0-9]*$"　　//正整数
+        "^((-\\d+)|(0+))$"　　//非正整数（负整数 + 0）
+        "^-[0-9]*[1-9][0-9]*$"　　//负整数
+        "^-?\\d+$"　　　　//整数
+        "^\\d+(\\.\\d+)?$"　　//非负浮点数（正浮点数 + 0）
+        "^(([0-9]+\\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\\.[0-9]+)|([0-9]*[1-9][0-9]*))$"　　//正浮点数
+        "^((-\\d+(\\.\\d+)?)|(0+(\\.0+)?))$"　　//非正浮点数（负浮点数 + 0）
+        "^(-(([0-9]+\\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\\.[0-9]+)|([0-9]*[1-9][0-9]*)))$"　　//负浮点数
+        "^(-?\\d+)(\\.\\d+)?$"　　//浮点数
+        "^[A-Za-z]+$"　　//由26个英文字母组成的字符串
+        "^[A-Z]+$"　　//由26个英文字母的大写组成的字符串
+        "^[a-z]+$"　　//由26个英文字母的小写组成的字符串
+        "^[A-Za-z0-9]+$"　　//由数字和26个英文字母组成的字符串
+        "^\\w+$"　　//由数字、26个英文字母或者下划线组成的字符串
+        "^[\\w-]+(\\.[\\w-]+)*@[\\w-]+(\\.[\\w-]+)+$"　　　　//email地址
+        "^[a-zA-z]+://(\\w+(-\\w+)*)(\\.(\\w+(-\\w+)*))*(\\?\\S*)?$"　　//url 
+</pre>
+    </div>
+
+    <script>
+        function myParseInt()
+        {
+            var num = document.getElementById("num").value;
+            var nnum = parseInt(num);
+            document.getElementById("tip").innerText = nnum;
+        }
+        function myIsNaN() {
+            var num = document.getElementById("num").value;
+            document.getElementById("tip").innerText = isNaN(num);
+        }
+        function myRegex() {
+            var num = document.getElementById("num").value;
+            var regVal = document.getElementById("regexVal").value;
+            var reg = new RegExp(regVal);
+            document.getElementById("tip").innerText = reg.test(num);
+        }
+    </script>
+</body>
+</html>
