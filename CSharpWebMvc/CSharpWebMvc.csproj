@@ -81,6 +81,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -144,9 +148,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http.Formatting">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
@@ -227,6 +228,104 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="chm\Bootstrap\about\index.html" />
+    <Content Include="chm\Bootstrap\apple-touch-icon.png" />
+    <Content Include="chm\Bootstrap\assets\css\docs.min.css" />
+    <Content Include="chm\Bootstrap\assets\css\patch.css" />
+    <Content Include="chm\Bootstrap\assets\flash\ZeroClipboard.swf" />
+    <Content Include="chm\Bootstrap\assets\img\components.png" />
+    <Content Include="chm\Bootstrap\assets\img\devices.png" />
+    <Content Include="chm\Bootstrap\assets\img\sass-less.png" />
+    <Content Include="chm\Bootstrap\assets\js\customize.min.js" />
+    <Content Include="chm\Bootstrap\assets\js\docs.min.js" />
+    <Content Include="chm\Bootstrap\assets\js\ie-emulation-modes-warning.js" />
+    <Content Include="chm\Bootstrap\assets\js\ie10-viewport-bug-workaround.js" />
+    <Content Include="chm\Bootstrap\assets\js\ie8-responsive-file-warning.js" />
+    <Content Include="chm\Bootstrap\assets\js\vendor\holder.min.html" />
+    <Content Include="chm\Bootstrap\bootstrap\css\bootstrap-theme.css" />
+    <Content Include="chm\Bootstrap\bootstrap\css\bootstrap-theme.min.css" />
+    <Content Include="chm\Bootstrap\bootstrap\css\bootstrap.css" />
+    <Content Include="chm\Bootstrap\bootstrap\css\bootstrap.min.css" />
+    <Content Include="chm\Bootstrap\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="chm\Bootstrap\bootstrap\js\bootstrap.js" />
+    <Content Include="chm\Bootstrap\bootstrap\js\bootstrap.min.js" />
+    <Content Include="chm\Bootstrap\bootstrap\js\jquery-3.2.1.min.js" />
+    <Content Include="chm\Bootstrap\components\index.html" />
+    <Content Include="chm\Bootstrap\css\index.html" />
+    <Content Include="chm\Bootstrap\custom.css" />
+    <Content Include="chm\Bootstrap\customize\index.html" />
+    <Content Include="chm\Bootstrap\dist\css\bootstrap-theme.min.css" />
+    <Content Include="chm\Bootstrap\examples\blog\blog.css" />
+    <Content Include="chm\Bootstrap\examples\blog\index.html" />
+    <Content Include="chm\Bootstrap\examples\carousel\carousel.css" />
+    <Content Include="chm\Bootstrap\examples\carousel\index.html" />
+    <Content Include="chm\Bootstrap\examples\cover\cover.css" />
+    <Content Include="chm\Bootstrap\examples\cover\index.html" />
+    <Content Include="chm\Bootstrap\examples\dashboard\dashboard.css" />
+    <Content Include="chm\Bootstrap\examples\dashboard\index.html" />
+    <Content Include="chm\Bootstrap\examples\grid\grid.css" />
+    <Content Include="chm\Bootstrap\examples\grid\index.html" />
+    <Content Include="chm\Bootstrap\examples\jumbotron-narrow\index.html" />
+    <Content Include="chm\Bootstrap\examples\jumbotron-narrow\jumbotron-narrow.css" />
+    <Content Include="chm\Bootstrap\examples\jumbotron\index.html" />
+    <Content Include="chm\Bootstrap\examples\jumbotron\jumbotron.css" />
+    <Content Include="chm\Bootstrap\examples\jumbotron\Popover requires tooltip.html" />
+    <Content Include="chm\Bootstrap\examples\justified-nav\index.html" />
+    <Content Include="chm\Bootstrap\examples\justified-nav\justified-nav.css" />
+    <Content Include="chm\Bootstrap\examples\navbar-fixed-top\index.html" />
+    <Content Include="chm\Bootstrap\examples\navbar-fixed-top\navbar-fixed-top.css" />
+    <Content Include="chm\Bootstrap\examples\navbar-static-top\index.html" />
+    <Content Include="chm\Bootstrap\examples\navbar-static-top\navbar-static-top.css" />
+    <Content Include="chm\Bootstrap\examples\navbar-static-top\Popover requires tooltip.html" />
+    <Content Include="chm\Bootstrap\examples\navbar\index.html" />
+    <Content Include="chm\Bootstrap\examples\navbar\navbar.css" />
+    <Content Include="chm\Bootstrap\examples\navbar\Popover requires tooltip.html" />
+    <Content Include="chm\Bootstrap\examples\non-responsive\index.html" />
+    <Content Include="chm\Bootstrap\examples\non-responsive\non-responsive.css" />
+    <Content Include="chm\Bootstrap\examples\offcanvas\index.html" />
+    <Content Include="chm\Bootstrap\examples\offcanvas\offcanvas.css" />
+    <Content Include="chm\Bootstrap\examples\offcanvas\offcanvas.js" />
+    <Content Include="chm\Bootstrap\examples\screenshots\blog.jpg" />
+    <Content Include="chm\Bootstrap\examples\screenshots\carousel.jpg" />
+    <Content Include="chm\Bootstrap\examples\screenshots\cover.jpg" />
+    <Content Include="chm\Bootstrap\examples\screenshots\dashboard.jpg" />
+    <Content Include="chm\Bootstrap\examples\screenshots\grid.jpg" />
+    <Content Include="chm\Bootstrap\examples\screenshots\jumbotron-narrow.jpg" />
+    <Content Include="chm\Bootstrap\examples\screenshots\jumbotron.jpg" />
+    <Content Include="chm\Bootstrap\examples\screenshots\justified-nav.jpg" />
+    <Content Include="chm\Bootstrap\examples\screenshots\navbar-fixed.jpg" />
+    <Content Include="chm\Bootstrap\examples\screenshots\navbar-static.jpg" />
+    <Content Include="chm\Bootstrap\examples\screenshots\navbar.jpg" />
+    <Content Include="chm\Bootstrap\examples\screenshots\non-responsive.jpg" />
+    <Content Include="chm\Bootstrap\examples\screenshots\offcanvas.jpg" />
+    <Content Include="chm\Bootstrap\examples\screenshots\sign-in.jpg" />
+    <Content Include="chm\Bootstrap\examples\screenshots\starter-template.jpg" />
+    <Content Include="chm\Bootstrap\examples\screenshots\sticky-footer-navbar.jpg" />
+    <Content Include="chm\Bootstrap\examples\screenshots\sticky-footer.jpg" />
+    <Content Include="chm\Bootstrap\examples\screenshots\theme.jpg" />
+    <Content Include="chm\Bootstrap\examples\signin\index.html" />
+    <Content Include="chm\Bootstrap\examples\signin\signin.css" />
+    <Content Include="chm\Bootstrap\examples\starter-template\index.html" />
+    <Content Include="chm\Bootstrap\examples\starter-template\Popover requires tooltip.html" />
+    <Content Include="chm\Bootstrap\examples\starter-template\starter-template.css" />
+    <Content Include="chm\Bootstrap\examples\sticky-footer-navbar\index.html" />
+    <Content Include="chm\Bootstrap\examples\sticky-footer-navbar\sticky-footer-navbar.css" />
+    <Content Include="chm\Bootstrap\examples\sticky-footer\index.html" />
+    <Content Include="chm\Bootstrap\examples\sticky-footer\sticky-footer.css" />
+    <Content Include="chm\Bootstrap\examples\theme\index.html" />
+    <Content Include="chm\Bootstrap\examples\theme\Popover requires tooltip.html" />
+    <Content Include="chm\Bootstrap\examples\theme\theme.css" />
+    <Content Include="chm\Bootstrap\examples\theme\ZeroClipboard.html" />
+    <Content Include="chm\Bootstrap\expo\img\3\61\34091ac7072297a889fe986b0238e.png" />
+    <Content Include="chm\Bootstrap\expo\img\6\56\aecc20901cc436b5cd10911302e0b.png" />
+    <Content Include="chm\Bootstrap\expo\img\7\b5\f9c2f01fad1f23574156e0577a06c.jpg" />
+    <Content Include="chm\Bootstrap\expo\img\9\77\9aa20712a7dba02b00e73db495950.png" />
+    <Content Include="chm\Bootstrap\favicon.ico" />
+    <Content Include="chm\Bootstrap\getting-started\index.html" />
+    <Content Include="chm\Bootstrap\index.html" />
+    <Content Include="chm\Bootstrap\javascript\index.html" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -234,15 +333,35 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Html\测试数字.html" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="log4net.config" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="chm\Bootstrap\bootstrap\css\bootstrap-theme.css.map" />
+    <Content Include="chm\Bootstrap\bootstrap\css\bootstrap-theme.min.css.map" />
+    <Content Include="chm\Bootstrap\bootstrap\css\bootstrap.css.map" />
+    <Content Include="chm\Bootstrap\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="chm\Bootstrap\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="chm\Bootstrap\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="chm\Bootstrap\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="chm\Bootstrap\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="Scripts\jquery-3.2.1.intellisense.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-3.2.1.js" />
+    <Content Include="Scripts\jquery-3.2.1.min.js" />
+    <Content Include="Scripts\jquery-3.2.1.slim.js" />
+    <Content Include="Scripts\jquery-3.2.1.slim.min.js" />
+    <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.2.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -296,12 +415,8 @@
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CSharpUtils\CSharpUtils.csproj">
