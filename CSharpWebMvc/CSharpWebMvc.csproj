@@ -409,6 +409,9 @@
     <Content Include="Views\Request\Index.cshtml" />
     <Content Include="Views\Sequence\Index.cshtml" />
     <Content Include="Views\Sequence\GetCode.cshtml" />
+    <Content Include="Views\Request\Param.cshtml" />
+    <Content Include="Views\Request\DoParamByGet.cshtml" />
+    <Content Include="Views\Request\DoParamByPost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

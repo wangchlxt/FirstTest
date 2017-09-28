@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "DoParamByPost";
+}
+
+@{
+    foreach (KeyValuePair<string, string> pair in ViewBag.param)
+    {
+        <div>
+            <span>@pair.Key</span>
+            <span style="margin-left:20px;">@pair.Value</span>
+        </div>
+    }
+}
+
