@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "支付";
+}
+
+<div style="text-align:center;width:100%;margin-top:20px;">
+    @{
+        if (ViewBag.type == "wechat")
+        {
+            <img style="width:280px;" src="~/Content/images/WechatPay.png" />
+            <h2>长按二维码识别,  向商家付款</h2>
+        }
+        else
+        {
+            <h2>请使用微信或支付宝扫描支付</h2>
+        }
+    }
+</div>
