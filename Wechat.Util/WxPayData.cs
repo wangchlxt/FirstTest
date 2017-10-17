@@ -6,8 +6,9 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using CSharpUtils;
 
-namespace CSharpConsoleApp
+namespace Wechat.Util
 {
     public class WxPayData
     {
@@ -70,16 +71,18 @@ namespace CSharpConsoleApp
                 //数据为空时不能转化为xml格式
                 if (0 == m_values.Count)
                 {
-                    Console.WriteLine(this.GetType().ToString() + "WxPayData数据为空!");
+                    LogHelper.Error(this.GetType().ToString() + "WxPayData数据为空!");
+                    throw new WxPayException("WxPayData数据为空!");
                 }
-
+                
                 sb.Append("<xml>");
                 foreach (KeyValuePair<string, object> pair in m_values)
                 {
                     //字段值不能为null，会影响后续流程
                     if (pair.Value == null)
                     {
-                        Console.WriteLine(this.GetType().ToString() + "WxPayData内部含有值为null的字段!");
+                        LogHelper.Error(this.GetType().ToString() + "WxPayData内部含有值为null的字段!");
+                        throw new WxPayException("WxPayData内部含有值为null的字段!");
                     }
 
                     if (pair.Value.GetType() == typeof(int))
@@ -92,15 +95,16 @@ namespace CSharpConsoleApp
                     }
                     else//除了string和int类型不能含有其他数据类型
                     {
-                        Console.WriteLine(String.Format("{0} WxPayData字段数据类型错误! {1}: {2}", this.GetType().ToString(), pair.Key, pair.Value));
+                        LogHelper.Error(String.Format("{0} WxPayData字段数据类型错误! {1}: {2}", this.GetType().ToString(), pair.Key, pair.Value));
+                        throw new WxPayException("WxPayData字段数据类型错误!");
                     }
                 }
                 sb.Append("</xml>");
-                Console.WriteLine("WxPayData:ToXml " + sb.ToString());
+                LogHelper.Info("WxPayData:ToXml " + sb.ToString());
             }
             catch (Exception ex)
             {
-                Console.WriteLine("WxPayData:ToXml 异常", ex);
+                LogHelper.Error("WxPayData:ToXml 异常", ex);
             }
 
             return sb.ToString();
@@ -116,7 +120,8 @@ namespace CSharpConsoleApp
         {
             if (string.IsNullOrEmpty(xml))
             {
-                Console.WriteLine(this.GetType().ToString() + "将空的xml串转换为WxPayData不合法!");
+                LogHelper.Error(this.GetType().ToString()+ "将空的xml串转换为WxPayData不合法!");
+                throw new WxPayException("将空的xml串转换为WxPayData不合法!");
             }
 
             XmlDocument xmlDoc = new XmlDocument();
@@ -132,15 +137,15 @@ namespace CSharpConsoleApp
             try
             {
                 //2015-06-29 错误是没有签名
-                if (m_values["return_code"] != "SUCCESS")
+                if (m_values["return_code"].ToString() != "SUCCESS")
                 {
                     return m_values;
                 }
                 CheckSign();//验证签名,不通过会抛异常
             }
-            catch (Exception ex)
+            catch (WxPayException ex)
             {
-                Console.WriteLine(ex.Message);
+                throw new WxPayException(ex.Message);
             }
 
             return m_values;
@@ -157,7 +162,8 @@ namespace CSharpConsoleApp
             {
                 if (pair.Value == null)
                 {
-                    Console.WriteLine(this.GetType().ToString() + "WxPayData内部含有值为null的字段!");
+                    LogHelper.Error(this.GetType().ToString()+ "WxPayData内部含有值为null的字段!");
+                    throw new WxPayException("WxPayData内部含有值为null的字段!");
                 }
 
                 if (pair.Key != "sign" && pair.Value.ToString() != "")
@@ -190,12 +196,13 @@ namespace CSharpConsoleApp
             {
                 if (pair.Value == null)
                 {
-                    Console.WriteLine(this.GetType().ToString() + "WxPayData内部含有值为null的字段!");
+                    LogHelper.Error(this.GetType().ToString()+ "WxPayData内部含有值为null的字段!");
+                    throw new WxPayException("WxPayData内部含有值为null的字段!");
                 }
 
                 str += string.Format("{0}={1}<br>", pair.Key, pair.Value.ToString());
             }
-            Console.WriteLine(this.GetType().ToString() + "Print in Web Page : " + str);
+            LogHelper.Debug(this.GetType().ToString()+ "Print in Web Page : " + str);
             return str;
         }
 
@@ -231,12 +238,14 @@ namespace CSharpConsoleApp
             //如果没有设置签名，则跳过检测
             if (!IsSet("sign"))
             {
-                Console.WriteLine(this.GetType().ToString() + "WxPayData签名存在但不合法!");
+                LogHelper.Error(this.GetType().ToString()+ "WxPayData签名存在但不合法!");
+                throw new WxPayException("WxPayData签名存在但不合法!");
             }
             //如果设置了签名但是签名为空，则抛异常
             else if (GetValue("sign") == null || GetValue("sign").ToString() == "")
             {
-                Console.WriteLine(this.GetType().ToString() + "WxPayData签名存在但不合法!");
+                LogHelper.Error(this.GetType().ToString()+ "WxPayData签名存在但不合法!");
+                throw new WxPayException("WxPayData签名存在但不合法!");
             }
 
             //获取接收到的签名
@@ -250,8 +259,8 @@ namespace CSharpConsoleApp
                 return true;
             }
 
-            Console.WriteLine(this.GetType().ToString() + "WxPayData签名验证错误!");
-            return false;
+            LogHelper.Error(this.GetType().ToString()+ "WxPayData签名验证错误!");
+            throw new WxPayException("WxPayData签名验证错误!");
         }
 
         /**
@@ -260,27 +269,6 @@ namespace CSharpConsoleApp
         public SortedDictionary<string, object> GetValues()
         {
             return m_values;
-        }
-
-        public static void Test()
-        {
-            WxPayData data = new WxPayData();
-            data.SetValue("body", "test");
-            data.SetValue("attach", "test");
-            data.SetValue("out_trade_no", CSharpUtils.StringUtil.GenerateRandomStr32());
-            data.SetValue("total_fee", 1.2);
-            data.SetValue("time_start", DateTime.Now.ToString("yyyyMMddHHmmss"));
-            data.SetValue("time_expire", DateTime.Now.AddMinutes(10).ToString("yyyyMMddHHmmss"));
-            data.SetValue("goods_tag", "test");
-            data.SetValue("trade_type", "JSAPI");
-            data.SetValue("openid", "wxc42810f095f1fd4f");
-
-            Console.WriteLine("");
-            Console.WriteLine(data.ToXml());
-            Console.WriteLine("");
-            Console.WriteLine(data.ToUrl());
-            Console.WriteLine("");
-            Console.WriteLine(data.ToJson());
         }
     }
 }

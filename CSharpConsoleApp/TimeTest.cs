@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace CSharpConsoleApp
 {
+    /// <summary>
+    /// 时间
+    /// </summary>
     public class TimeTest
     {
         public static void Test()
@@ -18,8 +21,6 @@ namespace CSharpConsoleApp
             Console.WriteLine(dt);
             Console.WriteLine(ts);
             Console.WriteLine("相差总分钟数："+ts.TotalMinutes.ToString());
-
-            Console.Read();
         }
 
     }

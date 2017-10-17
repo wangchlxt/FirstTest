@@ -13,7 +13,7 @@ namespace CSharpWebMvc.Controllers
         {
             get
             {
-                string strCode = StringUtil.GenerateRandomStr();
+                string strCode = StringUtil.GenerateRandomStr32();
                 LogHelper.Info(String.Format("SequenceBaseController get code：{0}", strCode));
                 return strCode;
             }

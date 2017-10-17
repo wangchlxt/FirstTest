@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpUtils", "CSharpUtils\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpConsoleApp", "CSharpConsoleApp\CSharpConsoleApp.csproj", "{1E7F8B86-0124-4502-847B-BCAA3AD6F556}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wechat.Util", "Wechat.Util\Wechat.Util.csproj", "{E7AD8243-FD86-452A-B8A0-06DF86B85CD8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redis", "Redis\Redis.csproj", "{F8AFC11A-1923-4831-96E2-0A523F437107}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{1E7F8B86-0124-4502-847B-BCAA3AD6F556}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E7F8B86-0124-4502-847B-BCAA3AD6F556}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E7F8B86-0124-4502-847B-BCAA3AD6F556}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7AD8243-FD86-452A-B8A0-06DF86B85CD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7AD8243-FD86-452A-B8A0-06DF86B85CD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7AD8243-FD86-452A-B8A0-06DF86B85CD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7AD8243-FD86-452A-B8A0-06DF86B85CD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8AFC11A-1923-4831-96E2-0A523F437107}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8AFC11A-1923-4831-96E2-0A523F437107}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8AFC11A-1923-4831-96E2-0A523F437107}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8AFC11A-1923-4831-96E2-0A523F437107}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

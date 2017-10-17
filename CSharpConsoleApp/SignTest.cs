@@ -7,6 +7,9 @@ using CSharpUtils;
 
 namespace CSharpConsoleApp
 {
+    /// <summary>
+    /// 签名
+    /// </summary>
     public class SignTest
     {
         public static void Test()
@@ -33,8 +36,6 @@ namespace CSharpConsoleApp
 
             string codeString = StringCoding.EncodeSHA1(sb.ToString());
             Console.WriteLine(codeString);
-
-            Console.Read();
         }
     }
 }

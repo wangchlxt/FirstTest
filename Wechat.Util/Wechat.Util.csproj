@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E7AD8243-FD86-452A-B8A0-06DF86B85CD8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Wechat.Util</RootNamespace>
+    <AssemblyName>Wechat.Util</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>Perforce Source Control Provider:{8D316614-311A-48F4-85F7-DF7020F62357}</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="LitJson, Version=0.9.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LitJson.0.9.0\lib\LitJson.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="HttpService.cs" />
+    <Compile Include="Messages\Reply\ReplyXml.cs" />
+    <Compile Include="Messages\Reply\Text.cs" />
+    <Compile Include="Messages\TemplateMessage\PaymentMessage.cs" />
+    <Compile Include="Messages\TemplateMessage\RemainingSumChangeMessage.cs" />
+    <Compile Include="Messages\WechatApi\Custom\CustemTemplateMessage.cs" />
+    <Compile Include="Messages\WechatApi\Custom\CustomMessage.cs" />
+    <Compile Include="Messages\WechatApi\WechatApiTemplateResponseMessage.cs" />
+    <Compile Include="Messages\WechatPost\Event\EventSubscribeMessage.cs" />
+    <Compile Include="Messages\WechatPost\Event\EventViewMessage.cs" />
+    <Compile Include="Messages\WechatApi\CallbackIpResponseMessage.cs" />
+    <Compile Include="Messages\WechatApi\Custom\CustomTextMessage.cs" />
+    <Compile Include="Messages\WechatPost\Event\TemplateMessage.cs" />
+    <Compile Include="WechatAccessToken.cs" />
+    <Compile Include="IWechatMessageHandler.cs" />
+    <Compile Include="Messages\WechatPost\Event\EventClickMessage.cs" />
+    <Compile Include="Messages\WechatApi\AccessTokenResponseMessage.cs" />
+    <Compile Include="Messages\WechatApi\Custom\CustomTextImageMessage.cs" />
+    <Compile Include="Messages\WechatApi\UserAccessTokenResponseMessage.cs" />
+    <Compile Include="Messages\WechatApi\WechatApiRequestMessage.cs" />
+    <Compile Include="Messages\WechatApi\WechatApiResponseMessage.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WechatApi.cs" />
+    <Compile Include="WechatApiInvokeException.cs" />
+    <Compile Include="WechatCall.cs" />
+    <Compile Include="WxPayJsConfig.cs" />
+    <Compile Include="WechatMessageHandler.cs" />
+    <Compile Include="WechatMessageType.cs" />
+    <Compile Include="WechatTicketResponse.cs" />
+    <Compile Include="WechatUri.cs" />
+    <Compile Include="WechatUtility.cs" />
+    <Compile Include="WxPayApi.cs" />
+    <Compile Include="WxPayData.cs" />
+    <Compile Include="WxPayException.cs" />
+    <Compile Include="WxPayRequest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Messages\WechatPost\Common\" />
+    <Folder Include="Messages\WechatPost\Passive\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CSharpUtils\CSharpUtils.csproj">
+      <Project>{f1516be4-a252-4a04-9028-3ced13b023f5}</Project>
+      <Name>CSharpUtils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Redis\Redis.csproj">
+      <Project>{f8afc11a-1923-4831-96e2-0a523f437107}</Project>
+      <Name>Redis</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

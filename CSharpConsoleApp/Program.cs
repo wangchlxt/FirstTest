@@ -10,7 +10,9 @@ namespace CSharpConsoleApp
     {
         static void Main(string[] args)
         {
-            WxPayData.Test();
+            StringTest.GenerateStringTest();
+
+            Console.Read();
         }
     }
 }

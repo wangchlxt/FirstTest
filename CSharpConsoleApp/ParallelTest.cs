@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace CSharpConsoleApp
 {
+    /// <summary>
+    /// 异步循环
+    /// </summary>
     public class ParallelTest
     {
         public static void Test()

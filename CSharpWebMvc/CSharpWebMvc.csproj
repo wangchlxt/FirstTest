@@ -432,6 +432,10 @@
       <Project>{f1516be4-a252-4a04-9028-3ced13b023f5}</Project>
       <Name>CSharpUtils</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Wechat.Util\Wechat.Util.csproj">
+      <Project>{e7ad8243-fd86-452a-b8a0-06df86b85cd8}</Project>
+      <Name>Wechat.Util</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

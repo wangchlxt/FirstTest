@@ -8,6 +8,9 @@ using CSharpUtils;
 
 namespace CSharpConsoleApp
 {
+    /// <summary>
+    /// 编码
+    /// </summary>
     public class CodingStringTest
     {
         public static void Test()

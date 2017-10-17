@@ -330,10 +330,20 @@ namespace CSharpUtils
         }
 
         /// <summary>
-        /// 生成随机字符串，随机串包含字母或数字
+        /// 生成32位随机数字字符串，实现：随机数加日期
         /// </summary>
         /// <returns></returns>
-        public static string GenerateRandomStr()
+        public static string GenerateRandomStr24()
+        {
+            Random rand = new Random();
+            return string.Format("{0}{1}{2}", rand.Next(100, 999), DateTime.Now.ToString("yyyyMMddHHmmssffff"), rand.Next(100, 999));
+        }
+
+        /// <summary>
+        /// 生成32位随机字符串，随机串包含字母或数字，实现：Guid
+        /// </summary>
+        /// <returns></returns>
+        public static string GenerateRandomStr32()
         {
             return Guid.NewGuid().ToString().Replace("-", "");
         }
@@ -345,7 +355,7 @@ namespace CSharpUtils
         /// <returns></returns>
         public static string GenerateRandomStr(string prefix)
         {
-            var ran = new Random();
+            Random ran = new Random();
             return string.Format("{0}{1}{2}", prefix, DateTime.Now.ToString("yyyyMMddHHmmss"), ran.Next(999));
         }
     }

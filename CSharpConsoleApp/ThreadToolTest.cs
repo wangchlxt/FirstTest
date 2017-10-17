@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace CSharpConsoleApp
 {
     /// <summary>
-    /// 线程池测试
+    /// 线程池
     /// </summary>
     public class ThreadToolTest
     {

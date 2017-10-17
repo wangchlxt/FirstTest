@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Wechat.Util;
 
 namespace CSharpWebMvc.Controllers
 {
@@ -55,6 +56,21 @@ namespace CSharpWebMvc.Controllers
 
             ViewBag.param = param;
             return View();
+        }
+
+        public ActionResult DoXml()
+        {
+            WxPayData data = new WxPayData();
+            data.SetValue("return_code", "SUCCESS");
+            data.SetValue("result_code", "SUCCESS");
+
+            string txt = data.ToXml();
+
+            // 无效
+            //Response.Write(data.ToXml());
+            //Response.End();
+
+            return File(System.Text.Encoding.Default.GetBytes(txt), "text/xml");
         }
     }
 }
