@@ -10,7 +10,7 @@ namespace CSharpConsoleApp
     {
         static void Main(string[] args)
         {
-            StringTest.GenerateStringTest();
+            EFTest.Test();
 
             Console.Read();
         }
