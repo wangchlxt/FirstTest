@@ -211,7 +211,9 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AttributeController.cs" />
     <Compile Include="Controllers\PayQRCodeController.cs" />
+    <Compile Include="Controllers\ResultController.cs" />
     <Compile Include="Controllers\ReturnController.cs" />
     <Compile Include="Controllers\SequenceBaseController.cs" />
     <Compile Include="Controllers\FileController.cs" />
@@ -219,7 +221,10 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RequestController.cs" />
     <Compile Include="Controllers\SequenceController.cs" />
+    <Compile Include="Filter\ControlAllAttribute.cs" />
+    <Compile Include="Filter\FirstAttribute.cs" />
     <Compile Include="Filter\MyActionFilter.cs" />
+    <Compile Include="Filter\SecondAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -417,6 +422,10 @@
     <Content Include="Views\Request\DoParamByGet.cshtml" />
     <Content Include="Views\Request\DoParamByPost.cshtml" />
     <Content Include="Views\PayQRCode\Index.cshtml" />
+    <Content Include="Views\Attribute\Index.cshtml" />
+    <Content Include="Views\Result\Index.cshtml" />
+    <Content Include="Views\Attribute\First.cshtml" />
+    <Content Include="Views\Attribute\Second.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
