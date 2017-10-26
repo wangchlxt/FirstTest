@@ -6,6 +6,8 @@
 *.ncb
 *.log
 *.pdb
+*.db
+*.opendb
 ._*
 [Dd]ebug
 [Rr]elease
@@ -18,3 +20,4 @@ packages/
 Key/
 !NuGet.exe 
 /.vs/
+ipch/
