@@ -84,6 +84,21 @@
     <ClInclude Include="Utils.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="FileUtil.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IUdpServer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AES.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AESEncryptor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Smtp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -135,6 +150,18 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Utils.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="FileUtil.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="AES.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="AESEncryptor.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Smtp.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

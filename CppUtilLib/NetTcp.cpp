@@ -15,6 +15,7 @@ CNetTcp::~CNetTcp()
 UINT _stdcall NetTcpServerThread(LPVOID lpParam)
 {
 	CNetTcp* pThis = (CNetTcp*)lpParam;
+	CStringA strErr;
 
 	SOCKET uiFdSerSocket;
 	SOCKET uiFdConnectSocket;
@@ -41,14 +42,23 @@ UINT _stdcall NetTcpServerThread(LPVOID lpParam)
 	uiFdSerSocket = socket(AF_INET, SOCK_STREAM, 0);
 	if (uiFdSerSocket == INVALID_SOCKET)
 	{
-		return WSAGetLastError();
+		int err = WSAGetLastError();
+		strErr.Format("socket err:%d create error" + err);
+		pThis->m_pRecv->TcpServerRecvData("", strErr.GetLength(), (BYTE*)strErr.GetBuffer());
+
+		return -1;
 	}
 
 	/* 绑定端口号 */
 	int nResult = bind(uiFdSerSocket, (struct sockaddr*)&stServerAddr, sizeof(sockaddr_in));
 	if (nResult == SOCKET_ERROR)
 	{
-		return WSAGetLastError();
+		int err = WSAGetLastError();
+		strErr.Format("socket err:%d bind error" + err);
+		pThis->m_pRecv->TcpServerRecvData("", strErr.GetLength(), (BYTE*)strErr.GetBuffer());
+
+		closesocket(uiFdSerSocket);
+		return -1;
 	}
 
 
@@ -56,7 +66,12 @@ UINT _stdcall NetTcpServerThread(LPVOID lpParam)
 	nResult = listen(uiFdSerSocket, 5);
 	if (nResult == SOCKET_ERROR)
 	{
-		return WSAGetLastError();
+		int err = WSAGetLastError();
+		strErr.Format("socket err:%d listen error" + err);
+		pThis->m_pRecv->TcpServerRecvData("", strErr.GetLength(), (BYTE*)strErr.GetBuffer());
+
+		closesocket(uiFdSerSocket);
+		return -1;
 	}
 
 	while (true)
@@ -67,6 +82,10 @@ UINT _stdcall NetTcpServerThread(LPVOID lpParam)
 		uiFdConnectSocket = accept(uiFdSerSocket, (SOCKADDR*)&stClientAddr, &iAddrlen);
 		if (uiFdConnectSocket == INVALID_SOCKET)
 		{
+			int err = WSAGetLastError();
+			strErr.Format("socket err:%d INVALID_SOCKET" + err);
+			pThis->m_pRecv->TcpServerRecvData("", strErr.GetLength(), (BYTE*)strErr.GetBuffer());
+
 			closesocket(uiFdConnectSocket);
 			continue;
 		}
@@ -79,23 +98,22 @@ UINT _stdcall NetTcpServerThread(LPVOID lpParam)
 		int nResult = recv(uiFdConnectSocket, szRecvbuffer, sizeof(szRecvbuffer), 0);
 		if (nResult == SOCKET_ERROR)
 		{
+			int err = WSAGetLastError();
+			strErr.Format("socket err:%d recv error" + err);
+			pThis->m_pRecv->TcpServerRecvData("", strErr.GetLength(), (BYTE*)strErr.GetBuffer());
+
 			closesocket(uiFdConnectSocket);
 			continue;
 		}
 
-		USES_CONVERSION;
-		nResult = pThis->m_pRecv->TcpServerRecvData(A2W(clientIp), nResult, (BYTE*)szRecvbuffer);
-		if (nResult == -1)
-		{
-			closesocket(uiFdConnectSocket);
-			break;
-		}
-
-		/* 发送消息到客户端，表示消息接收成功 */
-		CAtlStringA success = "success";
-		nResult = send(uiFdConnectSocket, success, success.GetLength(), 0);
+		pThis->m_pRecv->TcpServerRecvData(clientIp.GetBuffer(), nResult, (BYTE*)szRecvbuffer);
 
 		closesocket(uiFdConnectSocket);
+
+		if (!pThis->m_bIsRun)
+		{
+			break;
+		}
 	}
 
 	closesocket(uiFdSerSocket);
@@ -106,6 +124,7 @@ UINT _stdcall NetTcpServerThread(LPVOID lpParam)
 int CNetTcp::RunServer(int port, ITcpServer* pRecv)
 {
 	UINT uID = 0;
+	m_bIsRun = true;
 
 	if (!m_bIsRecv)
 	{
@@ -119,11 +138,88 @@ int CNetTcp::RunServer(int port, ITcpServer* pRecv)
 	return uID;
 }
 
+void CNetTcp::ClostServer()
+{
+	m_bIsRun = false;
+}
+
+int CNetTcp::SendMessA(CStringA ip, int port, CStringA mess)
+{
+	SOCKET uiFdClientsocket;
+
+	struct sockaddr_in stServerAddr;
+	int iAddrlen = sizeof(sockaddr_in);
+
+	/* 服务器监听的端口和地址 */
+	memset(&stServerAddr, 0, sizeof(stServerAddr));
+
+	stServerAddr.sin_family = AF_INET;
+	stServerAddr.sin_port = htons(port);
+	stServerAddr.sin_addr.s_addr = inet_addr(ip);
+
+	/* 创建SOCKET */
+	uiFdClientsocket = socket(AF_INET, SOCK_STREAM, 0);
+
+	/* 连接服务器 */
+	int nResult = connect(uiFdClientsocket, (SOCKADDR*)&stServerAddr, sizeof(sockaddr_in));
+	if (nResult == SOCKET_ERROR)
+	{
+		return WSAGetLastError();
+	}
+
+	/* 向服务器端发送数据 */
+	nResult = send(uiFdClientsocket, mess, mess.GetLength(), 0);
+	if (nResult == SOCKET_ERROR)
+	{
+		return WSAGetLastError();
+	}
+
+	closesocket(uiFdClientsocket);
+
+	return 0;
+}
+
+int CNetTcp::SendMessA2(char* ip, int port, char* mess)
+{
+	SOCKET uiFdClientsocket;
+
+	struct sockaddr_in stServerAddr;
+	int iAddrlen = sizeof(sockaddr_in);
+
+	/* 服务器监听的端口和地址 */
+	memset(&stServerAddr, 0, sizeof(stServerAddr));
+
+	stServerAddr.sin_family = AF_INET;
+	stServerAddr.sin_port = htons(port);
+	stServerAddr.sin_addr.s_addr = inet_addr(ip);
+
+	/* 创建SOCKET */
+	uiFdClientsocket = socket(AF_INET, SOCK_STREAM, 0);
+
+	/* 连接服务器 */
+	int nResult = connect(uiFdClientsocket, (SOCKADDR*)&stServerAddr, sizeof(sockaddr_in));
+	if (nResult == SOCKET_ERROR)
+	{
+		return WSAGetLastError();
+	}
+
+	/* 向服务器端发送数据 */
+	CStringA ms = mess;
+	nResult = send(uiFdClientsocket, ms, ms.GetLength(), 0);
+	if (nResult == SOCKET_ERROR)
+	{
+		return WSAGetLastError();
+	}
+
+	closesocket(uiFdClientsocket);
+
+	return 0;
+}
+
 int CNetTcp::SendMess(CAtlString ip, int port, CAtlString mess)
 {
-	USES_CONVERSION;
-	CAtlStringA ipa = W2A(ip);
-	CAtlStringA messa = W2A(mess);
+	CAtlStringA ipa = CW2A(ip);
+	CAtlStringA messa = CW2A(mess);
 
 	SOCKET uiFdClientsocket;
 
@@ -157,4 +253,50 @@ int CNetTcp::SendMess(CAtlString ip, int port, CAtlString mess)
 	closesocket(uiFdClientsocket);
 
 	return 0;
+}
+
+CStringA CNetTcp::SendMessRecvA(CStringA ip, int port, CStringA mess)
+{
+	SOCKET uiFdClientsocket;
+
+	struct sockaddr_in stServerAddr;
+	int iAddrlen = sizeof(sockaddr_in);
+
+	/* 服务器监听的端口和地址 */
+	memset(&stServerAddr, 0, sizeof(stServerAddr));
+
+	stServerAddr.sin_family = AF_INET;
+	stServerAddr.sin_port = htons(port);
+	stServerAddr.sin_addr.s_addr = inet_addr(ip);
+
+	/* 创建SOCKET */
+	uiFdClientsocket = socket(AF_INET, SOCK_STREAM, 0);
+
+	/* 连接服务器 */
+	int nResult = connect(uiFdClientsocket, (SOCKADDR*)&stServerAddr, sizeof(sockaddr_in));
+	if (nResult == SOCKET_ERROR)
+	{
+		return "";
+	}
+
+	/* 向服务器端发送数据 */
+	nResult = send(uiFdClientsocket, mess, mess.GetLength(), 0);
+	if (nResult == SOCKET_ERROR)
+	{
+		closesocket(uiFdClientsocket);
+		return "";
+	}
+
+	/* 接收客户端消息 */
+	char szRecvbuffer[10240] = { 0 };
+	recv(uiFdClientsocket, szRecvbuffer, sizeof(szRecvbuffer), 0);
+
+	closesocket(uiFdClientsocket);
+
+	return szRecvbuffer;
+}
+
+char* CNetTcp::SendMessRecvA2(char* ip, int port, char* mess)
+{
+	return SendMessRecvA(ip, port, mess).GetBuffer();
 }

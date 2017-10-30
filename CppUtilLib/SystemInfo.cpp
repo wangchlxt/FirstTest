@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "SystemInfo.h"
+#include "NIC.h"
+#include "Utils.h"
 
 #pragma warning(disable:4996)
 
@@ -190,4 +192,51 @@ void CSystemInfo::GetVersionMark(CAtlString& vmark)
 			break;
 		}
 	}
+}
+
+
+char* CSystemInfo::GetNICCodeA()
+{
+	CNIC nic;
+	nic.Init();
+
+	if (nic.m_vtNICA.size() == 0)
+	{
+		return "";
+	}
+
+	CStringA mac = nic.m_vtNICA.at(0).GetMACStringA("%02X-%02X-%02X-%02X-%02X-%02X");
+	mac += "GetNICCode";
+
+	CUtils utils;
+	return utils.StrEncodeMD5A(mac).GetBuffer();
+}
+
+wchar_t* CSystemInfo::GetNICCodeW()
+{
+	CNIC nic;
+	nic.Init();
+
+	if (nic.m_vtNICA.size() == 0)
+	{
+		return _T("");
+	}
+
+	CStringW mac = nic.m_vtNICA.at(0).GetMACStringW(_T("%02X-%02X-%02X-%02X-%02X-%02X"));
+	mac += _T("GetNICCode");
+
+	CUtils utils;
+	return utils.StrEncodeMD5W(mac).GetBuffer();
+}
+
+bool CSystemInfo::CheckNICCodeA(char* lpszCode)
+{
+	CStringA code = GetNICCodeA();
+	return code == lpszCode;
+}
+
+bool CSystemInfo::CheckNICCodeW(wchar_t* lpszCode)
+{
+	CStringW code = GetNICCodeW();
+	return code == lpszCode;
 }

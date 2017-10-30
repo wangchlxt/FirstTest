@@ -4,5 +4,5 @@
 class IBroadcastServer
 {
 public:
-	virtual int BroadcastServerRecvData(CAtlString strClientIp, DWORD dwLen, BYTE* pData) = 0;
+	virtual int BroadcastServerRecvData(CString strClientIp, DWORD dwLen, BYTE* pData) = 0;
 };

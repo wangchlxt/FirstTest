@@ -41,15 +41,25 @@ UINT _stdcall NetUdpServerThread(LPVOID lpParam)
 	{
 		memset(szBuffer, 0, len);
 		int ret = recvfrom(uiFdSocket, szBuffer, len, 0, (struct  sockaddr*)&stClientAddr, &iAddrlen);
+
+		CStringA clientIp = inet_ntoa(stClientAddr.sin_addr);
+
 		if (ret == SOCKET_ERROR)
 		{
-			CAtlString clientIp = CA2W(inet_ntoa(stClientAddr.sin_addr));
-			ret = pThis->m_pRecv->TcpServerRecvData(clientIp, ret, (BYTE*)szBuffer);
+			int err = WSAGetLastError();
+			CStringA strErr;
+			strErr.Format("recvfrom error:%d", err);
 
-			if (ret == -1)
-			{
-				break;
-			}
+			pThis->m_pRecv->UdpServerRecvData(clientIp.GetBuffer(), ret, (BYTE*)strErr.GetBuffer());
+		}
+		else
+		{
+			pThis->m_pRecv->UdpServerRecvData(clientIp.GetBuffer(), ret, (BYTE*)szBuffer);
+		}
+
+		if (!pThis->m_bIsRecv)
+		{
+			break;
 		}
 	}
 
@@ -58,9 +68,10 @@ UINT _stdcall NetUdpServerThread(LPVOID lpParam)
 	return 0;
 }
 
-int CNetUdp::RunServer(int port, ITcpServer* pRecv)
+int CNetUdp::RunServer(int port, IUdpServer* pRecv)
 {
 	UINT uID = 0;
+	m_bIsRun = true;
 
 	if (!m_bIsRecv)
 	{
@@ -74,6 +85,38 @@ int CNetUdp::RunServer(int port, ITcpServer* pRecv)
 	return uID;
 }
 
+void CNetUdp::ClostServer()
+{
+	m_bIsRun = false;
+}
+
+int CNetUdp::SendMessA(CAtlStringA ip, int port, CAtlStringA mess)
+{
+	SOCKET uiFdsocket;
+
+	struct sockaddr_in stServerAddr;
+	memset(&stServerAddr, 0, sizeof(stServerAddr));
+
+	int iAddrlen = sizeof(sockaddr_in);
+
+	/* 服务器监听的端口和地址 */
+	stServerAddr.sin_family = AF_INET;
+	stServerAddr.sin_port = htons(port);
+	stServerAddr.sin_addr.s_addr = inet_addr(ip);
+
+	uiFdsocket = socket(AF_INET, SOCK_DGRAM, 0);
+
+	int ret = sendto(uiFdsocket, mess.GetBuffer(), mess.GetLength(), 0, (struct  sockaddr*)&stServerAddr, iAddrlen);
+
+	closesocket(uiFdsocket);
+
+	return ret;
+}
+
+int CNetUdp::SendMessA2(char* ip, int port, char* mess)
+{
+	return SendMessA(ip, port, mess);
+}
 
 int CNetUdp::SendMess(CAtlString ip, int port, CAtlString mess)
 {
@@ -85,19 +128,15 @@ int CNetUdp::SendMess(CAtlString ip, int port, CAtlString mess)
 
 	int iAddrlen = sizeof(sockaddr_in);
 
-	const int len = 1024;
-	char szBuffer[len] = { 0 };
-
 	/* 服务器监听的端口和地址 */
 	stServerAddr.sin_family = AF_INET;
 	stServerAddr.sin_port = htons(port);
 	stServerAddr.sin_addr.s_addr = inet_addr(ipa);
 
-	//inet_pton(AF_INET, "117.79.229.199", &stServerAddr.sin_addr.s_addr );
-
 	uiFdsocket = socket(AF_INET, SOCK_DGRAM, 0);
 
-	int ret = sendto(uiFdsocket, szBuffer, len, 0, (struct  sockaddr*)&stServerAddr, iAddrlen);
+	CStringA msa = CW2A(mess);
+	int ret = sendto(uiFdsocket, msa.GetBuffer(), msa.GetLength(), 0, (struct  sockaddr*)&stServerAddr, iAddrlen);
 	
 	closesocket(uiFdsocket);
 
