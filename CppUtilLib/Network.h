@@ -12,9 +12,6 @@ public:
 	// 清理网络环境
 	static int UnInit();
 
-	// 获取 url 内容
-	CAtlString GetFileContent(CAtlString url);
-
 	// 启动 ftp 服务
 	void RunFtpServer();
 };

@@ -22,61 +22,62 @@ void CNetHttp::ClearInternet()
 	InternetCloseHandle(m_hi);
 }
 
-CAtlString CNetHttp::GetFileContent(CAtlString url)
+char* CNetHttp::GetFileContent(char* url)
 {
-	CAtlString html;
+	CStringA strErr;
 
 	if (!CheckNetConnect())
 	{
-		return html;
+		return "";
 	}
 
 	char msgbuf[256] = { 0 };
-	m_hi = InternetOpen(_T("http_down_dll"), INTERNET_OPEN_TYPE_PRECONFIG, NULL, INTERNET_INVALID_PORT_NUMBER, 0);
+	m_hi = InternetOpenA("http_down_dll", INTERNET_OPEN_TYPE_PRECONFIG, NULL, INTERNET_INVALID_PORT_NUMBER, 0);
 	if (m_hi == NULL)
 	{
-		return html;
+		return "";
 	}
 
-	HINTERNET hUrl = InternetOpenUrl(m_hi, url, NULL, 0, INTERNET_FLAG_RELOAD, 0);
+	HINTERNET hUrl = InternetOpenUrlA(m_hi, url, NULL, 0, INTERNET_FLAG_RELOAD, 0);
 	DWORD err = GetLastError();
 	if (hUrl == INVALID_HANDLE_VALUE)
 	{
 		InternetCloseHandle(m_hi);
-		return html;
+		return "";
 	}
 
 	TCHAR retBuf[10] = { 0 };
 	DWORD bufLen = sizeof(retBuf);
-	HttpQueryInfo(hUrl, HTTP_QUERY_STATUS_CODE, retBuf, &bufLen, NULL);
-
-	int dwRtn = _wtoi(retBuf);
-	if (dwRtn != HTTP_STATUS_OK)
+	if (!HttpQueryInfoA(hUrl, HTTP_QUERY_STATUS_CODE, retBuf, &bufLen, NULL))
 	{
+		DWORD err = GetLastError();
+		strErr.Format("error in HttpQueryInfoA code %d",err);
+
 		ClearInternet();
-		return html;
+		return strErr.GetBuffer();
 	}
 
-	BYTE buffer[0x40000] = { 0 };
-	DWORD len = 0;
-	InternetReadFile(hUrl, (LPVOID)buffer, 0x40000, &len);
+	
+	const int readBufLen = 0x40000;
+	BYTE* pBuffer = new BYTE[readBufLen];
+	memset(pBuffer, 0, readBufLen);
 
-	USES_CONVERSION;
-	CAtlStringA htmla;
-	htmla.Format("%s", buffer);
-	html = A2W(htmla);
+	DWORD len = 0;
+	InternetReadFile(hUrl, (LPVOID)pBuffer, readBufLen, &len);
 
 	ClearInternet();
-	return html;
+	return (char*)pBuffer;
 }
 
-CAtlStringA CNetHttp::GetHostA(CAtlStringA strUrl)
+char* CNetHttp::GetHostA(char* strUrl)
 {
-	CAtlStringA strHost = strUrl.MakeLower();
+	CStringA strHost = strUrl;
+	strHost = strHost.MakeLower();
 
-	if (strUrl.Find("http://") == 0)
+	CStringA url = strUrl;
+	if (url.Find("http://") == 0)
 	{
-		strHost = strUrl.Right(strUrl.GetLength() - 7);
+		strHost = url.Right(url.GetLength() - 7);
 	}
 
 	int idx = strHost.Find("/");
@@ -85,10 +86,10 @@ CAtlStringA CNetHttp::GetHostA(CAtlStringA strUrl)
 		strHost = strHost.Left(idx);
 	}
 
-	return strHost;
+	return strHost.GetBuffer();
 }
 
-CAtlStringA CNetHttp::GetParamA(CAtlStringA strUrl)
+char* CNetHttp::GetParamA(char* strUrl)
 {
 	CAtlStringA strParam = strUrl;
 
@@ -104,19 +105,19 @@ CAtlStringA CNetHttp::GetParamA(CAtlStringA strUrl)
 		strParam = strParam.Right(strParam.GetLength() - idx);
 	}
 
-	return strParam;
+	return strParam.GetBuffer();
 }
 
-hostent* CNetHttp::GetHostentA(CAtlStringA strUrl)
+hostent* CNetHttp::GetHostentA(char* strUrl)
 {
-	CAtlStringA host = GetHostA(strUrl);
+	CStringA host = GetHostA(strUrl);
 
 	return gethostbyname(host);
 }
 
-CAtlStringA CNetHttp::GetHttpHeadA(CAtlStringA method, CAtlStringA param, CAtlStringA host, CAtlStringA other)
+char* CNetHttp::GetHttpHeadA(char* method, char* param, char* host, char* other)
 {
-	CAtlStringA query;
+	CStringA query;
 	query += method;
 	query += " ";
 	query += param;
@@ -135,10 +136,10 @@ CAtlStringA CNetHttp::GetHttpHeadA(CAtlStringA method, CAtlStringA param, CAtlSt
 	query += other;
 	query += "\r\n\r\n";
 
-	return query;
+	return query.GetBuffer();
 }
 
-CAtlStringW CNetHttp::GetHttpHeadW(CAtlStringW method, CAtlStringW param, CAtlStringW host, CAtlStringW other)
+wchar_t* CNetHttp::GetHttpHeadW(wchar_t* method, wchar_t* param, wchar_t* host, wchar_t* other)
 {
 	CAtlStringW query;
 	query += method;
@@ -159,16 +160,16 @@ CAtlStringW CNetHttp::GetHttpHeadW(CAtlStringW method, CAtlStringW param, CAtlSt
 	query += other;
 	query += _T("\r\n\r\n");
 
-	return query;
+	return query.GetBuffer();
 }
 
-CAtlStringA CNetHttp::GetHtmlA(CAtlStringA strUrl)
+char* CNetHttp::GetHtmlA(char* strUrl)
 {
-	CAtlStringA html;
+	CStringA html;
 	hostent* ht = GetHostentA(strUrl);
 	if (ht == NULL)
 	{
-		return html;
+		return "";
 	}
 
 	in_addr inAddr;
@@ -185,7 +186,7 @@ CAtlStringA CNetHttp::GetHtmlA(CAtlStringA strUrl)
 	if (ret == SOCKET_ERROR)
 	{
 		closesocket(sk);
-		return html;
+		return "";
 	}
 
 	CAtlStringA query = GetHttpHeadA("GET", GetParamA(strUrl), GetHostA(strUrl), "");
@@ -205,5 +206,5 @@ CAtlStringA CNetHttp::GetHtmlA(CAtlStringA strUrl)
 	delete[] data;
 
 	closesocket(sk);
-	return html;
+	return html.GetBuffer();
 }

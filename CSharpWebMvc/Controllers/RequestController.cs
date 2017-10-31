@@ -72,5 +72,10 @@ namespace CSharpWebMvc.Controllers
 
             return File(System.Text.Encoding.Default.GetBytes(txt), "text/xml");
         }
+
+        public ActionResult ShowQueryString()
+        {
+            return View();
+        }
     }
 }

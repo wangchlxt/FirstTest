@@ -426,6 +426,7 @@
     <Content Include="Views\Result\Index.cshtml" />
     <Content Include="Views\Attribute\First.cshtml" />
     <Content Include="Views\Attribute\Second.cshtml" />
+    <Content Include="Views\Request\ShowQueryString.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

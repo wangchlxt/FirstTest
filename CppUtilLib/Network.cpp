@@ -38,12 +38,6 @@ int CNetwork::UnInit()
 	return WSACleanup();
 }
 
-CAtlString CNetwork::GetFileContent(CAtlString url)
-{
-	CNetHttp http;
-	return http.GetFileContent(url);
-}
-
 void CNetwork::RunFtpServer()
 {
 

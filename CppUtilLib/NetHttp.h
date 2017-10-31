@@ -13,31 +13,34 @@ public:
 	CNetHttp();
 	~CNetHttp();
 
-	BOOL CheckNetConnect();
-	void ClearInternet();
-	CAtlString GetFileContent(CAtlString url);
+	// 获取 strUrl 指向的内容
+	char* GetFileContent(char* strUrl);
 
 	// 获取 strUrl 中的域名
-	CAtlStringA GetHostA(CAtlStringA strUrl);
+	char* GetHostA(char* strUrl);
 
 	// 获取 strUrl 中域名后的部分
-	CAtlStringA GetParamA(CAtlStringA strUrl);
+	char* GetParamA(char* strUrl);
 
 	// 获取 hostent 结构指针
-	hostent* GetHostentA(CAtlStringA strUrl);
+	hostent* GetHostentA(char* strUrl);
 
 	// 获取 http 请求头
 	// method: 请求方式
 	// param: 域名后的部分，以 / 开通
 	// host: 域名
 	// other: 加到标准请求头的其他内容
-	CAtlStringA GetHttpHeadA(CAtlStringA method, CAtlStringA param, CAtlStringA host, CAtlStringA other);
-	CAtlStringW GetHttpHeadW(CAtlStringW method, CAtlStringW param, CAtlStringW host, CAtlStringW other);
+	char* GetHttpHeadA(char* method, char* param, char* host, char* other);
+	wchar_t* GetHttpHeadW(wchar_t* method, wchar_t* param, wchar_t* host, wchar_t* other);
 
 	// 获取 strUrl 页面的 html
-	CAtlStringA GetHtmlA(CAtlStringA strUrl);
+	char* GetHtmlA(char* strUrl);
 
+private:
 	HINTERNET m_hi;
 	HINTERNET m_hUrl;
+
+	BOOL CheckNetConnect();
+	void ClearInternet();
 };
 
