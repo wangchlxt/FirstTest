@@ -1,22 +1,23 @@
 
-// SendMsgDlg.h : 头文件
+// TcpServerDlg.h : 头文件
 //
 
 #pragma once
 #include "afxwin.h"
 #include "NetTcp.h"
-#include "NetUdp.h"
+#include "ITcpServer.h"
+#include "afxcmn.h"
 
-// CSendMsgDlg 对话框
-class CSendMsgDlg : public CDialogEx
+// CTcpServerDlg 对话框
+class CTcpServerDlg : public CDialogEx,ITcpServer
 {
 // 构造
 public:
-	CSendMsgDlg(CWnd* pParent = NULL);	// 标准构造函数
+	CTcpServerDlg(CWnd* pParent = NULL);	// 标准构造函数
 
 // 对话框数据
 #ifdef AFX_DESIGN_TIME
-	enum { IDD = IDD_SENDMSG_DIALOG };
+	enum { IDD = IDD_TCPSERVER_DIALOG };
 #endif
 
 	protected:
@@ -34,14 +35,15 @@ protected:
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
 public:
-	CNetTcp m_tcp;
-	CNetUdp m_udp;
 
-	CEdit m_cEditIp;
+	CAtlStringA TcpServerRecvData(CAtlStringA ip, DWORD dwLen, BYTE* pData);
+	afx_msg void OnBnClickedButtonStart();
+
+	CNetTcp m_tcp;
+	bool m_bIsRun;
 	CEdit m_cEditPort;
-	afx_msg void OnBnClickedButtonSendTcp();
+	CEdit m_cEditRet;
 	CEdit m_cEditMsg;
-	afx_msg void OnBnClickedButtonSendUdp();
-	CStatic m_cStaticRet;
-	afx_msg void OnBnClickedButtonSendRecv();
+	CButton m_cBtnStart;
+	CRichEditCtrl m_cRichEdit2Msg;
 };

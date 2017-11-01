@@ -14,12 +14,15 @@ public:
 	// 关闭 udp 服务
 	void ClostServer();
 
-	// 向 tcp 服务端发送消息，消息发送完既断开连接
+	// 向 udp 服务端发送消息，消息发送完既断开连接
 	int SendMessA(CAtlStringA ip, int port, CAtlStringA mess);
 	int SendMessA2(char* ip, int port, char* mess);
 
-	// 向 tcp 服务端发送消息，消息发送完既断开连接
+	// 向 udp 服务端发送消息，消息发送完既断开连接
 	int SendMess(CAtlString ip, int port, CAtlString mess);
+
+	// 向 udp 服务端发送数据，消息发送完既断开连接
+	int SendData(CAtlStringA ip, int port, char* pData,int dataLen);
 
 private:
 	friend UINT _stdcall NetUdpServerThread(LPVOID lpParam);

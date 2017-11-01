@@ -142,3 +142,26 @@ int CNetUdp::SendMess(CAtlString ip, int port, CAtlString mess)
 
 	return ret;
 }
+
+int CNetUdp::SendData(CAtlStringA ip, int port, char* pData, int dataLen)
+{
+	SOCKET uiFdsocket;
+
+	struct sockaddr_in stServerAddr;
+	memset(&stServerAddr, 0, sizeof(stServerAddr));
+
+	int iAddrlen = sizeof(sockaddr_in);
+
+	/* 服务器监听的端口和地址 */
+	stServerAddr.sin_family = AF_INET;
+	stServerAddr.sin_port = htons(port);
+	stServerAddr.sin_addr.s_addr = inet_addr(ip);
+
+	uiFdsocket = socket(AF_INET, SOCK_DGRAM, 0);
+
+	int ret = sendto(uiFdsocket, pData, dataLen, 0, (struct  sockaddr*)&stServerAddr, iAddrlen);
+
+	closesocket(uiFdsocket);
+
+	return ret;
+}

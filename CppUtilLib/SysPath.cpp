@@ -53,6 +53,17 @@ CAtlString CSysPath::GetCurrentDir()
 	return path;
 }
 
+CAtlString CSysPath::GetCurrentModelName()
+{
+	TCHAR szPath[MAX_PATH] = { 0 };
+	GetModuleFileName(NULL, szPath, MAX_PATH);
+
+	CAtlString path = szPath;
+	path = path.Right(path.GetLength() - path.ReverseFind('\\') - 1);
+
+	return path;
+}
+
 CAtlString CSysPath::GetTempDir()
 {
 	TCHAR szTempPath[MAX_PATH] = { 0 };

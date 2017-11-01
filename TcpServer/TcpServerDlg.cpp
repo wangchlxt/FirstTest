@@ -1,11 +1,12 @@
 
-// SendMsgDlg.cpp : 实现文件
+// TcpServerDlg.cpp : 实现文件
 //
 
 #include "stdafx.h"
-#include "SendMsg.h"
-#include "SendMsgDlg.h"
+#include "TcpServer.h"
+#include "TcpServerDlg.h"
 #include "afxdialogex.h"
+
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -45,38 +46,37 @@ BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
 END_MESSAGE_MAP()
 
 
-// CSendMsgDlg 对话框
+// CTcpServerDlg 对话框
 
 
 
-CSendMsgDlg::CSendMsgDlg(CWnd* pParent /*=NULL*/)
-	: CDialogEx(IDD_SENDMSG_DIALOG, pParent)
+CTcpServerDlg::CTcpServerDlg(CWnd* pParent /*=NULL*/)
+	: CDialogEx(IDD_TCPSERVER_DIALOG, pParent),m_bIsRun(false)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
 
-void CSendMsgDlg::DoDataExchange(CDataExchange* pDX)
+void CTcpServerDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
-	DDX_Control(pDX, IDC_EDIT_IP, m_cEditIp);
 	DDX_Control(pDX, IDC_EDIT_PORT, m_cEditPort);
+	DDX_Control(pDX, IDC_EDIT_RET, m_cEditRet);
 	DDX_Control(pDX, IDC_EDIT_MSG, m_cEditMsg);
-	DDX_Control(pDX, IDC_STATIC_RET, m_cStaticRet);
+	DDX_Control(pDX, IDC_BUTTON_START, m_cBtnStart);
+	DDX_Control(pDX, IDC_RICHEDIT2_MSG, m_cRichEdit2Msg);
 }
 
-BEGIN_MESSAGE_MAP(CSendMsgDlg, CDialogEx)
+BEGIN_MESSAGE_MAP(CTcpServerDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
-	ON_BN_CLICKED(IDC_BUTTON_SEND_TCP, &CSendMsgDlg::OnBnClickedButtonSendTcp)
-	ON_BN_CLICKED(IDC_BUTTON_SEND_UDP, &CSendMsgDlg::OnBnClickedButtonSendUdp)
-	ON_BN_CLICKED(IDC_BUTTON_SEND_RECV, &CSendMsgDlg::OnBnClickedButtonSendRecv)
+	ON_BN_CLICKED(IDC_BUTTON_START, &CTcpServerDlg::OnBnClickedButtonStart)
 END_MESSAGE_MAP()
 
 
-// CSendMsgDlg 消息处理程序
+// CTcpServerDlg 消息处理程序
 
-BOOL CSendMsgDlg::OnInitDialog()
+BOOL CTcpServerDlg::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 
@@ -105,12 +105,10 @@ BOOL CSendMsgDlg::OnInitDialog()
 	SetIcon(m_hIcon, TRUE);			// 设置大图标
 	SetIcon(m_hIcon, FALSE);		// 设置小图标
 
-	// TODO: 在此添加额外的初始化代码
-
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
 
-void CSendMsgDlg::OnSysCommand(UINT nID, LPARAM lParam)
+void CTcpServerDlg::OnSysCommand(UINT nID, LPARAM lParam)
 {
 	if ((nID & 0xFFF0) == IDM_ABOUTBOX)
 	{
@@ -127,7 +125,7 @@ void CSendMsgDlg::OnSysCommand(UINT nID, LPARAM lParam)
 //  来绘制该图标。  对于使用文档/视图模型的 MFC 应用程序，
 //  这将由框架自动完成。
 
-void CSendMsgDlg::OnPaint()
+void CTcpServerDlg::OnPaint()
 {
 	if (IsIconic())
 	{
@@ -154,68 +152,53 @@ void CSendMsgDlg::OnPaint()
 
 //当用户拖动最小化窗口时系统调用此函数取得光标
 //显示。
-HCURSOR CSendMsgDlg::OnQueryDragIcon()
+HCURSOR CTcpServerDlg::OnQueryDragIcon()
 {
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
 
 
-void CSendMsgDlg::OnBnClickedButtonSendTcp()
+void CTcpServerDlg::OnBnClickedButtonStart()
 {
-	CString ip, port, msg;
-	m_cEditIp.GetWindowTextW(ip);
-	m_cEditPort.GetWindowTextW(port);
-	m_cEditMsg.GetWindowTextW(msg);
+	if (m_bIsRun)
+	{
+		m_cBtnStart.SetWindowTextW(_T("启 动"));
 
-	CStringA ipa,msga;
-	ipa = CW2A(ip);
-	msga = CW2A(msg);
+		// 关闭 tcp server
+		m_tcp.ClostServer();
+	}
+	else
+	{
+		m_cBtnStart.SetWindowTextW(_T("关 闭"));
 
-	int iPort = _wtoi(port.GetBuffer());
+		// 启动 tcp server
+		CString strPort;
+		m_cEditPort.GetWindowTextW(strPort);
 
-	int ret = m_tcp.SendMessA(ipa.GetBuffer(), iPort, msga.GetBuffer());
-	
-	CString sRet;
-	sRet.Format(_T("发送结果 %d"), ret);
-	m_cStaticRet.SetWindowTextW(sRet);
+		int port = _wtoi(strPort);
+		m_tcp.RunServer(port, this);
+	}
+
+	m_bIsRun = !m_bIsRun;
 }
 
-
-void CSendMsgDlg::OnBnClickedButtonSendUdp()
+CAtlStringA CTcpServerDlg::TcpServerRecvData(CAtlStringA ip, DWORD dwLen, BYTE* pData)
 {
-	CString ip, port, msg;
-	m_cEditIp.GetWindowTextW(ip);
-	m_cEditPort.GetWindowTextW(port);
-	m_cEditMsg.GetWindowTextW(msg);
+	CString ret;
+	m_cEditRet.GetWindowTextW(ret);
 
-	int iPort = _wtoi(port.GetBuffer());
+	CString msg;
+	m_cRichEdit2Msg.GetWindowTextW(msg);
 
-	int ret = m_udp.SendMess(ip, iPort, msg);
+	CString ipw = CA2W(ip);
+	CString data = CA2W((char*)pData);
 
-	CString sRet;
-	sRet.Format(_T("发送结果码 %d"), ret);
-	m_cStaticRet.SetWindowTextW(sRet);
+	CString out = ipw + " -> " + data + "\r\n" + msg;
+
+	m_cRichEdit2Msg.SetWindowTextW(out);
+
+	CAtlStringA reta = CW2A(ret);
+	return reta;
 }
 
-
-void CSendMsgDlg::OnBnClickedButtonSendRecv()
-{
-	CString ip, port, msg;
-	m_cEditIp.GetWindowTextW(ip);
-	m_cEditPort.GetWindowTextW(port);
-	m_cEditMsg.GetWindowTextW(msg);
-
-	CStringA ipa, msga;
-	ipa = CW2A(ip);
-	msga = CW2A(msg);
-
-	int iPort = _wtoi(port.GetBuffer());
-
-	CStringA ret = m_tcp.SendMessRecvA(ipa.GetBuffer(), iPort, msga.GetBuffer());
-	CString retw = CA2W(ret);
-
-	CString sRet;
-	sRet.Format(_T("发送结果 %s"), retw.GetBuffer());
-	m_cStaticRet.SetWindowTextW(sRet);
-}

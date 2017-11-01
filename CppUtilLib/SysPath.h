@@ -17,6 +17,9 @@ public:
 	// 获取当前目录
 	CAtlString GetCurrentDir();
 
+	// 获取当前模块名称
+	CAtlString GetCurrentModelName();
+
 	// 获取临时目录
 	CAtlString GetTempDir();
 

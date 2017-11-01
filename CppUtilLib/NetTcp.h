@@ -15,16 +15,13 @@ public:
 	void ClostServer();
 
 	// 向 tcp 服务端发送消息，消息发送完既断开连接
-	int SendMessA(CStringA ip, int port, CStringA mess);
-	int SendMessA2(char* ip, int port, char* mess);
+	int SendMessA(CAtlStringA ip, int port, CAtlStringA mess);
 
 	// 向 tcp 服务端发送消息，消息发送完既断开连接
 	int SendMess(CAtlString ip, int port, CAtlString mess);
 
 	// 向 tcp 服务端发送消息，消息发送完既断开连接
-	CStringA SendMessRecvA(CStringA ip, int port, CStringA mess);
-
-	char* SendMessRecvA2(char* ip, int port, char* mess);
+	CAtlStringA SendMessRecvA(CAtlStringA ip, int port, CAtlStringA mess);
 
 private:
 	friend UINT _stdcall NetTcpServerThread(LPVOID lpParam);

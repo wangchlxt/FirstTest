@@ -32,6 +32,11 @@ protected:
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
+
+private:
+	// ≥ı ºªØ list ctrl
+	void InitListCtrl();
+
 public:
 	CListCtrl m_cListProcess;
 
@@ -41,4 +46,5 @@ public:
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg void OnFlashProcess();
 	afx_msg void OnOpenProcess();
+	afx_msg void OnMenuExit();
 };

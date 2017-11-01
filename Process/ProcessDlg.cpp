@@ -77,6 +77,7 @@ BEGIN_MESSAGE_MAP(CProcessDlg, CDialogEx)
 	ON_WM_TIMER()
 	ON_COMMAND(ID_FLASH_PROCESS, &CProcessDlg::OnFlashProcess)
 	ON_COMMAND(ID_OPEN_PROCESS, &CProcessDlg::OnOpenProcess)
+	ON_COMMAND(ID_MENU_EXIT, &CProcessDlg::OnMenuExit)
 END_MESSAGE_MAP()
 
 
@@ -111,13 +112,34 @@ BOOL CProcessDlg::OnInitDialog()
 	SetIcon(m_hIcon, TRUE);			// 设置大图标
 	SetIcon(m_hIcon, FALSE);		// 设置小图标
 
-	m_cListProcess.InsertColumn(0, _T("进程ID"), LVCFMT_LEFT, 80);
-	m_cListProcess.InsertColumn(1, _T("父进程ID"), LVCFMT_LEFT, 80);
-	m_cListProcess.InsertColumn(2, _T("进程名称"), LVCFMT_LEFT, 500);
+	InitListCtrl();
 
 	SetTimer(1, 10000, NULL);
 
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
+}
+
+void CProcessDlg::InitListCtrl()
+{
+	// 通过 GetWindowLong 来获取 CListCtrl 已有的样式 
+	DWORD dwStyle = GetWindowLong(m_cListProcess.m_hWnd, GWL_STYLE);
+
+	// 在原有样式的基本上，添加 LVS_REPORT 扩展样式 
+	SetWindowLong(m_cListProcess.m_hWnd, GWL_STYLE, dwStyle | LVS_REPORT);
+
+	// 获取已有的扩展样式 
+	DWORD dwStyles = m_cListProcess.GetExStyle();
+
+	// 取消复选框样式 
+	dwStyles &= ~LVS_EX_CHECKBOXES;
+
+	// 添加整行选择和表格线扩展样式 
+	m_cListProcess.SetExtendedStyle(dwStyles | LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
+
+	// 设置列
+	m_cListProcess.InsertColumn(0, _T("进程ID"), LVCFMT_LEFT, 80);
+	m_cListProcess.InsertColumn(1, _T("父进程ID"), LVCFMT_LEFT, 80);
+	m_cListProcess.InsertColumn(2, _T("进程名称"), LVCFMT_LEFT, 500);
 }
 
 void CProcessDlg::OnSysCommand(UINT nID, LPARAM lParam)
@@ -276,4 +298,10 @@ void CProcessDlg::OnOpenProcess()
 {
 	COpenProcessDlg wnd;
 	wnd.DoModal();
+}
+
+
+void CProcessDlg::OnMenuExit()
+{
+	exit(1);
 }
