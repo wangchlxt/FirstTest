@@ -135,6 +135,7 @@
     <ClInclude Include="AES.h" />
     <ClInclude Include="AESEncryptor.h" />
     <ClInclude Include="Base64Coding.h" />
+    <ClInclude Include="ClipboardUtil.h" />
     <ClInclude Include="FileUtil.h" />
     <ClInclude Include="HardDisk.h" />
     <ClInclude Include="IBroadcastServer.h" />
@@ -159,11 +160,13 @@
     <ClInclude Include="SysPath.h" />
     <ClInclude Include="SystemInfo.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="TimeUtil.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AES.cpp" />
     <ClCompile Include="AESEncryptor.cpp" />
+    <ClCompile Include="ClipboardUtil.cpp" />
     <ClCompile Include="FileUtil.cpp" />
     <ClCompile Include="HardDisk.cpp" />
     <ClCompile Include="Log.cpp" />
@@ -188,6 +191,7 @@
     <ClCompile Include="StringUtil.cpp" />
     <ClCompile Include="SysPath.cpp" />
     <ClCompile Include="SystemInfo.cpp" />
+    <ClCompile Include="TimeUtil.cpp" />
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

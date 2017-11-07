@@ -21,3 +21,4 @@ Key/
 !NuGet.exe 
 /.vs/
 ipch/
+bin/

@@ -132,3 +132,67 @@ CAtlString CStringUtil::GetNextString(CAtlString str)
 
 	return str;
 }
+
+CAtlString CStringUtil::UTF8ToUnicode(CAtlStringA str)
+{
+	int len = 0;
+	len = str.GetLength();
+	int unicodeLen = ::MultiByteToWideChar(CP_UTF8,
+		0,
+		str.GetBuffer(),
+		-1,
+		NULL,
+		0);
+
+	wchar_t * pUnicode;
+	pUnicode = new wchar_t[unicodeLen + 1];
+	memset(pUnicode, 0, (unicodeLen + 1) * sizeof(wchar_t));
+
+	::MultiByteToWideChar(CP_UTF8,
+		0,
+		str.GetBuffer(),
+		-1,
+		(LPWSTR)pUnicode,
+		unicodeLen);
+
+	CAtlString strText;
+	strText = (wchar_t*)pUnicode;
+	delete pUnicode;
+
+	return strText;
+}
+
+
+CAtlStringA CStringUtil::UnicodeToUTF8(CAtlString str)
+{
+	char* pElementText;
+	int iTextLen;
+
+	// wide char to multi char
+	iTextLen = WideCharToMultiByte(CP_UTF8,
+		0,
+		str.GetBuffer(),
+		-1,
+		NULL,
+		0,
+		NULL,
+		NULL);
+
+	pElementText = new char[iTextLen + 1];
+	memset((void*)pElementText, 0, sizeof(char) * (iTextLen + 1));
+
+	::WideCharToMultiByte(CP_UTF8,
+		0,
+		str.GetBuffer(),
+		-1,
+		pElementText,
+		iTextLen,
+		NULL,
+		NULL);
+
+	CAtlStringA strText = pElementText;
+	delete[] pElementText;
+
+	return strText;
+}
+

@@ -6,8 +6,10 @@
 #include "ToolsFairy.h"
 #include "ToolsFairyDlg.h"
 #include "afxdialogex.h"
+#include "NetHttp.h"
 
 #include "GetHtmlDlg.h"
+#include "SetWndDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -60,6 +62,7 @@ CToolsFairyDlg::CToolsFairyDlg(CWnd* pParent /*=NULL*/)
 void CToolsFairyDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
+	DDX_Control(pDX, IDC_STATIC_MSG, m_cStaticMsg);
 }
 
 BEGIN_MESSAGE_MAP(CToolsFairyDlg, CDialogEx)
@@ -67,6 +70,7 @@ BEGIN_MESSAGE_MAP(CToolsFairyDlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDC_BUTTON_GET_HTML_CONTENT, &CToolsFairyDlg::OnBnClickedButtonGetHtmlContent)
+	ON_BN_CLICKED(IDC_BUTTON_SET_WND, &CToolsFairyDlg::OnBnClickedButtonSetWnd)
 END_MESSAGE_MAP()
 
 
@@ -101,7 +105,15 @@ BOOL CToolsFairyDlg::OnInitDialog()
 	SetIcon(m_hIcon, TRUE);			// 设置大图标
 	SetIcon(m_hIcon, FALSE);		// 设置小图标
 
-	// TODO: 在此添加额外的初始化代码
+	CNetHttp netHttp;
+	CAtlStringA ip = netHttp.GetHostNetIp();
+	CAtlString ipw = CA2W(ip);
+
+	CAtlString hostIp = netHttp.GetLocalIp();
+	
+	CAtlString msg;
+	msg.Format(_T("外网 ip：%s  局域网 ip：%s"), ipw, hostIp);
+	m_cStaticMsg.SetWindowTextW(msg);
 
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
@@ -159,7 +171,16 @@ HCURSOR CToolsFairyDlg::OnQueryDragIcon()
 
 void CToolsFairyDlg::OnBnClickedButtonGetHtmlContent()
 {
-	CGetHtmlDlg* m_pWnd = new CGetHtmlDlg();
-	m_pWnd->Create(IDD_DIALOG_GET_HTML);
-	m_pWnd->ShowWindow(SW_SHOWNORMAL);
+	CGetHtmlDlg* pWnd = new CGetHtmlDlg();
+	pWnd->Create(IDD_DIALOG_GET_HTML);
+	pWnd->ShowWindow(SW_SHOWNORMAL);
+}
+
+
+void CToolsFairyDlg::OnBnClickedButtonSetWnd()
+{
+	CSetWndDlg* pWnd = new CSetWndDlg();
+	pWnd->Create(IDD_DIALOG_SET_WND);
+	pWnd->ShowWindow(SW_SHOWNORMAL);
+	
 }

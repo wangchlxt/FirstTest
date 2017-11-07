@@ -1,6 +1,12 @@
 #include "stdafx.h"
 #include "NetHttp.h"
 #include <atlconv.h>
+#include <atlconv.h>
+#include "SysPath.h"
+#include "StringUtil.h"
+
+#include <WinInet.h>
+#pragma comment (lib,"Wininet.lib")
 
 CNetHttp::CNetHttp()
 {
@@ -22,7 +28,7 @@ void CNetHttp::ClearInternet()
 	InternetCloseHandle(m_hi);
 }
 
-char* CNetHttp::GetFileContent(char* url)
+CAtlStringA CNetHttp::GetFileContent(CAtlStringA url)
 {
 	CStringA strErr;
 
@@ -38,17 +44,17 @@ char* CNetHttp::GetFileContent(char* url)
 		return "";
 	}
 
-	HINTERNET hUrl = InternetOpenUrlA(m_hi, url, NULL, 0, INTERNET_FLAG_RELOAD, 0);
+	HINTERNET hInternet = InternetOpenUrlA(m_hi, url, NULL, 0, INTERNET_FLAG_RELOAD, 0);
 	DWORD err = GetLastError();
-	if (hUrl == INVALID_HANDLE_VALUE)
+	if (hInternet == INVALID_HANDLE_VALUE)
 	{
 		InternetCloseHandle(m_hi);
 		return "";
 	}
 
-	TCHAR retBuf[10] = { 0 };
+	char retBuf[10] = { 0 };
 	DWORD bufLen = sizeof(retBuf);
-	if (!HttpQueryInfoA(hUrl, HTTP_QUERY_STATUS_CODE, retBuf, &bufLen, NULL))
+	if (!HttpQueryInfoA(hInternet, HTTP_QUERY_STATUS_CODE, retBuf, &bufLen, NULL))
 	{
 		DWORD err = GetLastError();
 		strErr.Format("error in HttpQueryInfoA code %d",err);
@@ -57,19 +63,33 @@ char* CNetHttp::GetFileContent(char* url)
 		return strErr.GetBuffer();
 	}
 
+	CAtlStringA html;
 	
-	const int readBufLen = 0x40000;
-	BYTE* pBuffer = new BYTE[readBufLen];
-	memset(pBuffer, 0, readBufLen);
+	const DWORD tmpLen = 10240;
+	char szTmp[tmpLen] = { 0 };
+	DWORD rlen = 0;
+	DWORD readPoint = 0;
 
-	DWORD len = 0;
-	InternetReadFile(hUrl, (LPVOID)pBuffer, readBufLen, &len);
+	while (InternetReadFile(hInternet, szTmp, tmpLen, &rlen))
+	{
+		html += szTmp;
+		memset(szTmp, 0, tmpLen);
+
+		DWORD moveLen = InternetSetFilePointer(hInternet, readPoint, NULL, FILE_BEGIN, 0);
+		if (moveLen == INVALID_SET_FILE_POINTER)
+		{
+			break;
+		}
+
+		readPoint += moveLen;
+	}
 
 	ClearInternet();
-	return (char*)pBuffer;
+
+	return html;
 }
 
-char* CNetHttp::GetHostA(char* strUrl)
+CAtlStringA CNetHttp::GetHostA(CAtlStringA strUrl)
 {
 	CStringA strHost = strUrl;
 	strHost = strHost.MakeLower();
@@ -89,7 +109,7 @@ char* CNetHttp::GetHostA(char* strUrl)
 	return strHost.GetBuffer();
 }
 
-char* CNetHttp::GetParamA(char* strUrl)
+CAtlStringA CNetHttp::GetParamA(CAtlStringA strUrl)
 {
 	CAtlStringA strParam = strUrl;
 
@@ -108,14 +128,14 @@ char* CNetHttp::GetParamA(char* strUrl)
 	return strParam.GetBuffer();
 }
 
-hostent* CNetHttp::GetHostentA(char* strUrl)
+hostent* CNetHttp::GetHostentA(CAtlStringA strUrl)
 {
 	CStringA host = GetHostA(strUrl);
 
 	return gethostbyname(host);
 }
 
-char* CNetHttp::GetHttpHeadA(char* method, char* param, char* host, char* other)
+CAtlStringA CNetHttp::GetHttpHeadA(CAtlStringA method, CAtlStringA param, CAtlStringA host, CAtlStringA other)
 {
 	CStringA query;
 	query += method;
@@ -139,7 +159,7 @@ char* CNetHttp::GetHttpHeadA(char* method, char* param, char* host, char* other)
 	return query.GetBuffer();
 }
 
-wchar_t* CNetHttp::GetHttpHeadW(wchar_t* method, wchar_t* param, wchar_t* host, wchar_t* other)
+CAtlString CNetHttp::GetHttpHeadW(CAtlString method, CAtlString param, CAtlString host, CAtlString other)
 {
 	CAtlStringW query;
 	query += method;
@@ -163,9 +183,9 @@ wchar_t* CNetHttp::GetHttpHeadW(wchar_t* method, wchar_t* param, wchar_t* host, 
 	return query.GetBuffer();
 }
 
-char* CNetHttp::GetHtmlA(char* strUrl)
+CAtlStringA CNetHttp::GetHtmlA(CAtlStringA strUrl)
 {
-	CStringA html;
+	CAtlStringA html;
 	hostent* ht = GetHostentA(strUrl);
 	if (ht == NULL)
 	{
@@ -206,5 +226,70 @@ char* CNetHttp::GetHtmlA(char* strUrl)
 	delete[] data;
 
 	closesocket(sk);
-	return html.GetBuffer();
+	return html;
 }
+
+CAtlStringA CNetHttp::GetHtmlByDownFileA(CAtlStringA url)
+{
+	CAtlStringA html;
+
+	// 清理缓存
+	DeleteUrlCacheEntryA(url);
+
+	CSysPath sysPath;
+	CAtlString tmpFile = sysPath.GetTempFileNameStr();
+	CAtlStringA tmpFileA = CW2A(tmpFile);
+
+	if (S_OK == URLDownloadToFileA(NULL, url, tmpFileA, NULL, NULL))
+	{
+		HANDLE hFile = CreateFileA(tmpFileA, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+		if (hFile != INVALID_HANDLE_VALUE)
+		{
+			LARGE_INTEGER fileSize;
+			GetFileSizeEx(hFile, &fileSize);
+
+			char* szTmp = new char[fileSize.QuadPart + 2];
+			memset(szTmp, 0, fileSize.QuadPart + 2);
+
+			DWORD rlen = 0;
+			ReadFile(hFile, szTmp, fileSize.QuadPart, &rlen, NULL);
+
+			html = szTmp;
+			delete[] szTmp;
+		}
+
+		CloseHandle(hFile);
+	}
+
+	DeleteFileA(tmpFileA);
+	return html;
+}
+
+CAtlStringA CNetHttp::GetHostNetIp()
+{
+	CAtlStringA html = GetHtmlByDownFileA("http://cwx.quectel-service.com/Tool/WechatUtilTest2");
+
+	//html = html.Right(html.GetLength() - html.Find("<center>您的IP是：[") - 1);
+	//html = html.Left(html.Find("]"));
+	
+	return html;
+}
+
+// 获取本机外网 ip，从百度获取
+CAtlStringA CNetHttp::GetHostNetIpFormBaidu()
+{
+	return "";
+}
+
+// 获取本机外网 ip，从 ip138 获取
+CAtlStringA CNetHttp::GetHostNetIpFormIP138()
+{
+	return "";
+}
+
+// 获取本机外网 ip 和城市，从 ip138 获取
+CAtlStringA CNetHttp::GetHostNetIpAndCityFormIP138()
+{
+	return "";
+}
+

@@ -3,6 +3,7 @@
 //
 
 #pragma once
+#include "afxwin.h"
 
 
 // CToolsFairyDlg ¶Ô»°¿ò
@@ -33,4 +34,6 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnBnClickedButtonGetHtmlContent();
+	CStatic m_cStaticMsg;
+	afx_msg void OnBnClickedButtonSetWnd();
 };

@@ -40,6 +40,7 @@
             this.buttonGet = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxCoding = new System.Windows.Forms.ComboBox();
+            this.textBoxCode = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -117,7 +118,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBoxOut.Location = new System.Drawing.Point(26, 153);
             this.richTextBoxOut.Name = "richTextBoxOut";
-            this.richTextBoxOut.Size = new System.Drawing.Size(454, 360);
+            this.richTextBoxOut.Size = new System.Drawing.Size(532, 360);
             this.richTextBoxOut.TabIndex = 11;
             this.richTextBoxOut.Text = "";
             // 
@@ -130,7 +131,7 @@
             // 
             // buttonGet
             // 
-            this.buttonGet.Location = new System.Drawing.Point(414, 113);
+            this.buttonGet.Location = new System.Drawing.Point(512, 114);
             this.buttonGet.Name = "buttonGet";
             this.buttonGet.Size = new System.Drawing.Size(46, 23);
             this.buttonGet.TabIndex = 13;
@@ -152,23 +153,31 @@
             this.comboBoxCoding.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCoding.FormattingEnabled = true;
             this.comboBoxCoding.Items.AddRange(new object[] {
-            "ASCII",
-            "BigEndianUnicode",
-            "Default",
+            "",
             "Unicode",
-            "UTF32",
-            "UTF7",
-            "UTF8"});
+            "UTF-7",
+            "UTF-8",
+            "UTF-32",
+            "gb2312",
+            "gbk"});
             this.comboBoxCoding.Location = new System.Drawing.Point(331, 115);
             this.comboBoxCoding.Name = "comboBoxCoding";
             this.comboBoxCoding.Size = new System.Drawing.Size(77, 20);
             this.comboBoxCoding.TabIndex = 23;
             // 
+            // textBoxCode
+            // 
+            this.textBoxCode.Location = new System.Drawing.Point(414, 115);
+            this.textBoxCode.Name = "textBoxCode";
+            this.textBoxCode.Size = new System.Drawing.Size(92, 21);
+            this.textBoxCode.TabIndex = 24;
+            // 
             // ScanWebSiteForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(504, 525);
+            this.ClientSize = new System.Drawing.Size(582, 525);
+            this.Controls.Add(this.textBoxCode);
             this.Controls.Add(this.comboBoxCoding);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonGet);
@@ -200,5 +209,6 @@
         private System.Windows.Forms.Button buttonGet;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBoxCoding;
+        private System.Windows.Forms.TextBox textBoxCode;
     }
 }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Wechat.Util;
+using CSharpWebMvc.Models;
 
 namespace CSharpWebMvc.Controllers
 {
@@ -77,5 +78,17 @@ namespace CSharpWebMvc.Controllers
         {
             return View();
         }
+
+        public ActionResult To(int? id)
+        {
+            return View("ToId");
+        }
+        
+        [HttpPost]
+        public ActionResult To(UserModels user)
+        {
+            return View("ToName");
+        }
+
     }
 }

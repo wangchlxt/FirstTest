@@ -192,8 +192,8 @@
     <Content Include="436413.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\git\FirstTest\CSharpUtils\CSharpUtils.csproj">
-      <Project>{F1516BE4-A252-4A04-9028-3CED13B023F5}</Project>
+    <ProjectReference Include="..\..\CSharpUtils\CSharpUtils.csproj">
+      <Project>{f1516be4-a252-4a04-9028-3ced13b023f5}</Project>
       <Name>CSharpUtils</Name>
     </ProjectReference>
   </ItemGroup>

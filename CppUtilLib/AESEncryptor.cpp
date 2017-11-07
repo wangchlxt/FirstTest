@@ -73,12 +73,14 @@ string CAESEncryptor::EncryptString(string strInfor)
 string CAESEncryptor::DecryptString(string strMessage)
 {
 	int nLength = strMessage.length() / 2;
-	unsigned char* pBuffer = new unsigned char[nLength];
+	unsigned char* pBuffer = new unsigned char[nLength + 10];
 	memset(pBuffer, '\0', nLength);
 	Hex2Byte(strMessage.c_str(), strMessage.length(), pBuffer);
 
 	m_pEncryptor->InvCipher(pBuffer, nLength);
 	string retValue((char*)pBuffer);
+
+	memset(pBuffer, '\0', nLength);
 	delete[] pBuffer;
 	return retValue;
 }

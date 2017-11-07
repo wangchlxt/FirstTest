@@ -240,7 +240,7 @@ namespace CSharpUtils.Net
         }
 
 
-        public static string HttpGet(string getUrl, string paramData, string authorization = null)
+        public static string HttpGet(string getUrl, string paramData, string authorization = null,string contentType = "text/html;charset=UTF-8",string htmlCoding= "utf-8")
         {
             string rtnString = "";
             HttpWebResponse response = null;
@@ -248,7 +248,7 @@ namespace CSharpUtils.Net
             {
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(getUrl + (paramData == "" ? "" : "?") + paramData);
                 request.Method = "GET";
-                request.ContentType = "text/html;charset=UTF-8";
+                request.ContentType = contentType;
 
                 //认证
                 if (!string.IsNullOrEmpty(authorization))
@@ -260,7 +260,7 @@ namespace CSharpUtils.Net
                 response = (HttpWebResponse)request.GetResponse();
                 if (response != null)
                 {
-                    using (StreamReader reader = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding("utf-8")))
+                    using (StreamReader reader = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding(htmlCoding)))
                     {
                         rtnString = reader.ReadToEnd();
                         response.Close();

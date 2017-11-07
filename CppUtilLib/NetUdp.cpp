@@ -16,7 +16,7 @@ UINT _stdcall NetUdpServerThread(LPVOID lpParam)
 	CNetUdp* pThis = (CNetUdp*)lpParam;
 
 	SOCKET uiFdSocket;
-	const int len = 10240;
+	const int len = 102400;
 	char szBuffer[len] = { 0 };
 
 	struct sockaddr_in stServerAddr;

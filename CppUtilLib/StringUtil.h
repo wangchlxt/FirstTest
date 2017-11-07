@@ -31,5 +31,8 @@ public:
 
 	// 获取 str 的下一个字符串
 	CAtlString GetNextString(CAtlString str);
+
+	CAtlString UTF8ToUnicode(CAtlStringA str);
+	CAtlStringA UnicodeToUTF8(CAtlString str);
 };
 

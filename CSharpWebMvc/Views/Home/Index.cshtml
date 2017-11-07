@@ -14,6 +14,14 @@
     <a href="/Request/Param" class="btn btn-primary btn-lg">Request Param</a>
     <a href="/Request/DoXml" class="btn btn-primary btn-lg">Request DoXml</a>
     <a href="/Request/ShowQueryString?p1=abc&p2=de789&p3=中国" class="btn btn-primary btn-lg">Request ShowQueryString</a>
+    <a href="/Request/To" class="btn btn-primary btn-lg">Request To</a>
+    <a href="/Request/To?id=123" class="btn btn-primary btn-lg">Request To?id=123</a>
+    <form action="/Request/To" method="post">
+        <input type="text" name="id" value="123" />
+        <input type="text" name="name" value="中国" />
+        <input type="submit" value="Request To"/>
+    </form>
+    
     <br/>
 
     <a href="/Return/ToBaidu" class="btn btn-primary btn-lg">Return ToBaidu</a>

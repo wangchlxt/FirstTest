@@ -46,11 +46,19 @@ void CGetHtmlDlg::OnBnClickedButtonGet()
 	CStringA urla = CW2A(url);
 
 	CNetHttp http;
-	char* pBuffer = http.GetFileContent(urla.GetBuffer());
-	CStringA content = pBuffer;
-	delete[] pBuffer;
-	pBuffer = NULL;
+	CAtlStringA html = http.GetHtmlByDownFileA(urla);
 
-	CString contentw = CA2W(content);
+	CString contentw = CA2W(html);
 	m_cEditContent.SetWindowTextW(contentw);
+}
+
+
+BOOL CGetHtmlDlg::OnInitDialog()
+{
+	CDialogEx::OnInitDialog();
+
+	m_cEditUrl.SetWindowTextW(_T("http://www.baidu.com"));
+
+	return TRUE;  // return TRUE unless you set the focus to a control
+				  // 异常: OCX 属性页应返回 FALSE
 }

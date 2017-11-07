@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 using CSharpUtils;
 using CSharpUtils.Net;
-using System.Threading;
 
 namespace ToolFairy
 {
@@ -106,7 +106,18 @@ namespace ToolFairy
 
             //richTextBoxOut.Text = HttpUtil.GetWebRequest(textBoxUrl.Text, "", ConvertUtil.ConvertEncodingString(comboBoxCoding.Text));
 
-            richTextBoxOut.Text = HttpUtil.HttpGet(textBoxUrl.Text, "");
+            string code = comboBoxCoding.Text;
+            if(string.IsNullOrEmpty(code))
+            {
+                code = textBoxCode.Text;
+            }
+
+            if(string.IsNullOrEmpty(code))
+            {
+                code = "UTF-8";
+            }
+
+            richTextBoxOut.Text = HttpUtil.HttpGet(textBoxUrl.Text,"","", "text/html;charset=" + code, code);
         }
         
     }

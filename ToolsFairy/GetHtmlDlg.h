@@ -25,4 +25,5 @@ public:
 	CEdit m_cEditUrl;
 	CEdit m_cEditContent;
 	afx_msg void OnBnClickedButtonGet();
+	virtual BOOL OnInitDialog();
 };

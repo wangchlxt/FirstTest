@@ -54,7 +54,7 @@ UINT _stdcall NetTcpServerThread(LPVOID lpParam)
 	if (nResult == SOCKET_ERROR)
 	{
 		int err = WSAGetLastError();
-		strErr.Format("socket err:%d bind error" + err);
+		strErr.Format("socket err:%d bind error", err);
 		pThis->m_pRecv->TcpServerRecvData("", strErr.GetLength(), (BYTE*)strErr.GetBuffer());
 
 		closesocket(uiFdSerSocket);

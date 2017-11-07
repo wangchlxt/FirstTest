@@ -27,6 +27,9 @@
     <ClInclude Include="TimeTest.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="MapTest.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -36,6 +39,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="TimeTest.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MapTest.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
