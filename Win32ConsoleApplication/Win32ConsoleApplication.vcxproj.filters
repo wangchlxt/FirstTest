@@ -30,6 +30,15 @@
     <ClInclude Include="MapTest.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="DeskTest.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="StdThreadTest.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemTest.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -42,6 +51,15 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="MapTest.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DeskTest.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="StdThreadTest.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemTest.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
