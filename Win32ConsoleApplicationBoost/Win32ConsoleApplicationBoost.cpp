@@ -5,12 +5,16 @@
 #include <iostream>
 using namespace std;
 
-#include "ThreadTest.h"
+//#include "ThreadTest.h"
+#include "RegexTest.h"
 
 int main()
 {
-	CThreadTest t;
-	t.Test();
+	/*CThreadTest t;
+	t.Test();*/
+
+	CRegexTest reg;
+	reg.Test();
 
 	system("pause");
     return 0;

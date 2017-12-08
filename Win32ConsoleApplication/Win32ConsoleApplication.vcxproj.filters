@@ -39,6 +39,12 @@
     <ClInclude Include="SystemTest.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="PortTest.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="StrTest.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -60,6 +66,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="SystemTest.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PortTest.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="StrTest.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

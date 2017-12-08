@@ -92,11 +92,12 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\CppUtilLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\CppUtilLib;E:\lib\boost_1_65_1;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <AdditionalDependencies>..\Debug\CppUtilLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>E:\lib\boost_1_65_1\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -140,13 +141,14 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\CppUtilLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\CppUtilLib;E:\lib\boost_1_65_1;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>..\Release\CppUtilLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>E:\lib\boost_1_65_1\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -189,6 +191,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AppSet.h" />
     <ClInclude Include="GetHtmlDlg.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SetWndDlg.h" />
@@ -196,8 +199,10 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="ToolsFairy.h" />
     <ClInclude Include="ToolsFairyDlg.h" />
+    <ClInclude Include="WebDownDlg.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AppSet.cpp" />
     <ClCompile Include="GetHtmlDlg.cpp" />
     <ClCompile Include="SetWndDlg.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -208,6 +213,7 @@
     </ClCompile>
     <ClCompile Include="ToolsFairy.cpp" />
     <ClCompile Include="ToolsFairyDlg.cpp" />
+    <ClCompile Include="WebDownDlg.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ToolsFairy.rc" />

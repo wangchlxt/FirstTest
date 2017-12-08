@@ -62,3 +62,26 @@ DWORD CFileUtil::FileToOld(wchar_t* lpstFileName)
 
 	return 0;
 }
+
+CAtlStringA CFileUtil::GetFileTextA(CAtlStringA fileName)
+{
+	CAtlStringA html;
+	HANDLE hFile = CreateFileA(fileName, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+	if (hFile != INVALID_HANDLE_VALUE)
+	{
+		LARGE_INTEGER fileSize;
+		GetFileSizeEx(hFile, &fileSize);
+
+		char* szTmp = new char[fileSize.QuadPart + 2];
+		memset(szTmp, 0, fileSize.QuadPart + 2);
+
+		DWORD rlen = 0;
+		ReadFile(hFile, szTmp, fileSize.QuadPart, &rlen, NULL);
+
+		html = szTmp;
+		delete[] szTmp;
+	}
+
+	CloseHandle(hFile);
+	return html;
+}

@@ -7,9 +7,12 @@
 #include "ToolsFairyDlg.h"
 #include "afxdialogex.h"
 #include "NetHttp.h"
+#include "AppSet.h"
+#include "SysPath.h"
 
 #include "GetHtmlDlg.h"
 #include "SetWndDlg.h"
+#include "WebDownDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -71,6 +74,7 @@ BEGIN_MESSAGE_MAP(CToolsFairyDlg, CDialogEx)
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDC_BUTTON_GET_HTML_CONTENT, &CToolsFairyDlg::OnBnClickedButtonGetHtmlContent)
 	ON_BN_CLICKED(IDC_BUTTON_SET_WND, &CToolsFairyDlg::OnBnClickedButtonSetWnd)
+	ON_BN_CLICKED(IDC_BUTTON_WEB_DOWN, &CToolsFairyDlg::OnBnClickedButtonWebDown)
 END_MESSAGE_MAP()
 
 
@@ -107,13 +111,15 @@ BOOL CToolsFairyDlg::OnInitDialog()
 
 	CNetHttp netHttp;
 	CAtlStringA ip = netHttp.GetHostNetIp();
-	CAtlString ipw = CA2W(ip);
-
-	CAtlString hostIp = netHttp.GetLocalIp();
+	CAppSet::netIp = CA2W(ip);
+	CAppSet::hostIp = netHttp.GetLocalIp();
 	
 	CAtlString msg;
-	msg.Format(_T("外网 ip：%s  局域网 ip：%s"), ipw, hostIp);
+	msg.Format(_T("外网 ip：%s  局域网 ip：%s"), CAppSet::netIp, CAppSet::hostIp);
 	m_cStaticMsg.SetWindowTextW(msg);
+
+	CSysPath sysPath;
+	CAppSet::currentPath = sysPath.GetCurrentDir();
 
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
@@ -183,4 +189,12 @@ void CToolsFairyDlg::OnBnClickedButtonSetWnd()
 	pWnd->Create(IDD_DIALOG_SET_WND);
 	pWnd->ShowWindow(SW_SHOWNORMAL);
 	
+}
+
+
+void CToolsFairyDlg::OnBnClickedButtonWebDown()
+{
+	CWebDownDlg* pWnd = new CWebDownDlg();
+	pWnd->Create(IDD_DIALOG_WEB_DOWN);
+	pWnd->ShowWindow(SW_SHOWNORMAL);
 }

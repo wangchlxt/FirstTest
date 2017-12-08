@@ -30,6 +30,36 @@
     <ClInclude Include="AsioTest.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="asio\cpp11\http\server\connection.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="asio\cpp11\http\server\connection_manager.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="asio\cpp11\http\server\header.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="asio\cpp11\http\server\mime_types.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="asio\cpp11\http\server\reply.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="asio\cpp11\http\server\request.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="asio\cpp11\http\server\request_handler.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="asio\cpp11\http\server\request_parser.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="asio\cpp11\http\server\server.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="RegexTest.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -42,6 +72,30 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="AsioTest.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="asio\cpp11\http\server\connection.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="asio\cpp11\http\server\connection_manager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="asio\cpp11\http\server\mime_types.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="asio\cpp11\http\server\reply.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="asio\cpp11\http\server\request_handler.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="asio\cpp11\http\server\request_parser.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="asio\cpp11\http\server\server.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="RegexTest.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

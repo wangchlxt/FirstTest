@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+
+    <script src="jquery-3.1.1.js"></script>
+    <script src="jquery.validate.js"></script>
+    <script src="additional-methods.js"></script>
+
+    <link href="bootstrap.css" rel="stylesheet" />
+    <link href="bootstrap-grid.css" rel="stylesheet" />
+    <link href="bootstrap-reboot.css" rel="stylesheet" />
+    <script src="bootstrap.js"></script>
+    
+    <script>
+        $(document).ready(function () {
+            $("#add_subclient input").addClass("form-control");
+            $(".errorlist").addClass("text-danger");
+            $(".error").addClass("has-error");
+
+            $("#testForm").validate();
+            $("#signupForm").validate({
+                rules: {
+                    loginname: {
+                        required: true,
+                        minlength: 2,
+                        maxlength: 50
+                    },
+                    password: {
+                        required: true,
+                        minlength: 6,
+                        maxlength: 30
+                    }
+                },
+                messages: {
+                    loginname: {
+                        required: "请输入登录名",
+                        minlength: "您的登录名必须至少包含 2 个字符",
+                        maxlength: "您的登录名必须最多包含 50 个字符"
+                    },
+                    password: {
+                        required: "请输入密码",
+                        minlength: "您的密码必须至少包含 6 个字符",
+                        maxlength: "您的密码必须最多包含 30 个字符"
+                    }
+                },
+                errorElement: "em",
+                errorPlacement: function (error, element) {
+                    error.addClass("help-block");
+                    element.parents(".col-lg-6").addClass("has-feedback");
+
+                    if (element.prop("type") === "checkbox") {
+                        error.insertAfter(element.parent("label"));
+                    } else {
+                        error.insertAfter(element);
+                    }
+
+                    if (!element.next("span")[0]) {
+                        $("<span class='glyphicon glyphicon-remove form-control-feedback'></span>").insertAfter(element);
+                    }
+                },
+                success: function (label, element) {
+                    if (!$(element).next("span")[0]) {
+                        $("<span class='glyphicon glyphicon-ok form-control-feedback'></span>").insertAfter($(element));
+                    }
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).parents(".col-lg-6").addClass("has-error").removeClass("has-success");
+                    $(element).next("span").addClass("glyphicon-remove").removeClass("glyphicon-ok");
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).parents(".col-lg-6").addClass("has-success").removeClass("has-error");
+                    $(element).next("span").addClass("glyphicon-ok").removeClass("glyphicon-remove");
+                }
+            });
+        });
+    </script>
+
+    <title></title>
+</head>
+<body>
+
+    <form id="testForm">
+        <input type="text" name="1" class="required email" /><br/>
+        <input type="text" name="2" class="required email" /><br />
+        <input type="text" name="3" class="required email" /><br />
+        <div class="form-group">
+            <label for="exampleInputEmail1" class="control-label col-lg-2">登录名</label>
+            <div class="col-lg-6 ">
+                <i class="fa fa-user"></i>
+                <input type="text" class="form-control required email" id="loginname"
+                       name="loginname" style="width:370px;">
+            </div>
+        </div>
+        <input type="submit" value="Submit"/><br /><br />
+    </form>
+
+
+    <form id="signupForm" method="post" action="">
+
+        <input type="text" class="required email col-lg-6" />
+
+        <p class="col-lg-6">
+            <label for="firstname">Firstname</label>
+            <input id="firstname" name="firstname" class="required" />
+        </p>
+        <p>
+            <label for="email">E-Mail</label>
+            <input id="email" name="email" class="required email" />
+        </p>
+        <p>
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" class="{required:true,minlength:5}" />
+        </p>
+        <p>
+            <label for="confirm_password">确认密码</label>
+            <input id="confirm_password" name="confirm_password" type="password" class="{required:true,minlength:5,equalTo:'#password'}" />
+        </p>
+        <div class="form-group">
+            <br>
+            <label class="control-label col-lg-2">电子邮箱:</label>
+            <div class="col-lg-6">
+                <input id="email" name="email" type="text" />
+                必填。不多于50个字符。
+            </div>
+        </div>
+        <p>
+            <input class="submit" type="submit" value="Submit" />
+        </p>
+    </form>
+
+</body>
+</html>

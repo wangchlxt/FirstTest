@@ -83,17 +83,19 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>E:\lib\boost_1_65_1;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\CppUtilLib;E:\lib\boost_1_65_1;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>E:\lib\boost_1_65_1\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>..\Debug\CppUtilLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -112,13 +114,14 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>E:\lib\boost_1_65_1;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\CppUtilLib;E:\lib\boost_1_65_1;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -126,6 +129,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>E:\lib\boost_1_65_1\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>..\Release\CppUtilLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -150,12 +154,30 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AsioTest.h" />
+    <ClInclude Include="asio\cpp11\http\server\connection.hpp" />
+    <ClInclude Include="asio\cpp11\http\server\connection_manager.hpp" />
+    <ClInclude Include="asio\cpp11\http\server\header.hpp" />
+    <ClInclude Include="asio\cpp11\http\server\mime_types.hpp" />
+    <ClInclude Include="asio\cpp11\http\server\reply.hpp" />
+    <ClInclude Include="asio\cpp11\http\server\request.hpp" />
+    <ClInclude Include="asio\cpp11\http\server\request_handler.hpp" />
+    <ClInclude Include="asio\cpp11\http\server\request_parser.hpp" />
+    <ClInclude Include="asio\cpp11\http\server\server.hpp" />
+    <ClInclude Include="RegexTest.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="ThreadTest.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AsioTest.cpp" />
+    <ClCompile Include="asio\cpp11\http\server\connection.cpp" />
+    <ClCompile Include="asio\cpp11\http\server\connection_manager.cpp" />
+    <ClCompile Include="asio\cpp11\http\server\mime_types.cpp" />
+    <ClCompile Include="asio\cpp11\http\server\reply.cpp" />
+    <ClCompile Include="asio\cpp11\http\server\request_handler.cpp" />
+    <ClCompile Include="asio\cpp11\http\server\request_parser.cpp" />
+    <ClCompile Include="asio\cpp11\http\server\server.cpp" />
+    <ClCompile Include="RegexTest.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

@@ -13,5 +13,7 @@ public:
 
 	// 将文件重命名为旧文件，文件扩展名改为 .old_[日期字符串]。成功返回 0，失败返回错误码
 	DWORD FileToOld(wchar_t* lpstFileName);
+
+	CAtlStringA GetFileTextA(CAtlStringA fileName);
 };
 
