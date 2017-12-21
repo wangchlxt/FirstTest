@@ -66,6 +66,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	SetFilePointer(hFile, 0, 0, FILE_END);
 
+
+
+
     MSG msg;
 
     // 主消息循环: 

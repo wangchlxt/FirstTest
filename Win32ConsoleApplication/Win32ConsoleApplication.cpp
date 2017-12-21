@@ -9,14 +9,18 @@
 #include "SystemTest.h"
 #include "PortTest.h"
 #include "StrTest.h"
+#include "WinHttpTest.h"
 
 #include <iostream>
 using namespace std;
 
 int main()
 {
-	CStrTest str;
-	str.Test();
+	CWinHttpTest winHttpTest;
+	winHttpTest.Test();
+
+	/*CStrTest str;
+	str.Test();*/
 
 	//system("wmic process > c:/process33.txt");
 
