@@ -160,6 +160,7 @@
     <ClInclude Include="SystemTest.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TimeTest.h" />
+    <ClInclude Include="WinHttpTest.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DeskTest.cpp" />
@@ -176,6 +177,7 @@
     <ClCompile Include="SystemTest.cpp" />
     <ClCompile Include="TimeTest.cpp" />
     <ClCompile Include="Win32ConsoleApplication.cpp" />
+    <ClCompile Include="WinHttpTest.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

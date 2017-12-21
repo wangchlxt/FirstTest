@@ -10,3 +10,8 @@ CAsioTest::CAsioTest()
 CAsioTest::~CAsioTest()
 {
 }
+
+void CAsioTest::Test()
+{
+
+}

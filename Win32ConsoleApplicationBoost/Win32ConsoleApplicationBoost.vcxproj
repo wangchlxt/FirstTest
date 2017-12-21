@@ -153,6 +153,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AsioTcpTest.h" />
     <ClInclude Include="AsioTest.h" />
     <ClInclude Include="asio\cpp11\http\server\connection.hpp" />
     <ClInclude Include="asio\cpp11\http\server\connection_manager.hpp" />
@@ -169,6 +170,7 @@
     <ClInclude Include="ThreadTest.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AsioTcpTest.cpp" />
     <ClCompile Include="AsioTest.cpp" />
     <ClCompile Include="asio\cpp11\http\server\connection.cpp" />
     <ClCompile Include="asio\cpp11\http\server\connection_manager.cpp" />

@@ -4,5 +4,7 @@ class CAsioTest
 public:
 	CAsioTest();
 	~CAsioTest();
+
+	void Test();
 };
 

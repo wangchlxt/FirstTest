@@ -22,15 +22,23 @@ protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV Ö§³Ö
 
 	DECLARE_MESSAGE_MAP()
+
 public:
 	afx_msg void OnBnClickedButtonDown();
-	CEdit m_cEditDirUrl;
-	virtual BOOL OnInitDialog();
-	void InitListCtrl();
-	CListCtrl m_cListDown;
 	afx_msg void OnBnClickedButtonGetDir();
 	afx_msg void OnWebDownOpen();
+
+	virtual BOOL OnInitDialog();
+	void InitListCtrl();
+	void PushErrorDown(int row);
+
+public:
+	CEdit m_cEditDirUrl;
+	CEdit m_cEditMsg;
+	CListCtrl m_cListDown;
+
 	CAtlString m_strSavePath;
 	CAtlString m_strBookCfgFile;
 	CAtlString m_strBookName;
+
 };

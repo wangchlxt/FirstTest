@@ -36,6 +36,7 @@ void CWebDownDlg::DoDataExchange(CDataExchange* pDX)
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_EDIT_DIR_URL, m_cEditDirUrl);
 	DDX_Control(pDX, IDC_LIST_DOWN, m_cListDown);
+	DDX_Control(pDX, IDC_EDIT_MSG, m_cEditMsg);
 }
 
 
@@ -188,6 +189,8 @@ UINT __stdcall WorkThread(LPVOID lpParam)
 		return -1;
 	}
 
+	int retry = 0;
+
 	for (int i = 0;i < pThis->m_cListDown.GetItemCount();i++)
 	{
 		CAtlString url = pThis->m_cListDown.GetItemText(i, 0);
@@ -199,7 +202,16 @@ UINT __stdcall WorkThread(LPVOID lpParam)
 
 		if (html.IsEmpty())
 		{
+			if (retry < 3)
+			{
+				retry++;
+				i--;
+				continue;
+			}
+
+			retry = 0;
 			pThis->m_cListDown.SetItemText(i, 2, _T("ÏÂÔØÊ§°Ü"));
+			pThis->PushErrorDown(i);
 		}
 		else
 		{
@@ -245,6 +257,15 @@ void CWebDownDlg::OnWebDownOpen()
 	
 }
 
+void CWebDownDlg::PushErrorDown(int row)
+{
+	CString txt;
+	m_cEditMsg.GetWindowTextW(txt);
+	
+	CString tmp;
+	tmp.Format(_T("%d,"), row);
 
-
+	txt += tmp;
+	m_cEditMsg.SetWindowTextW(txt);
+}
 
