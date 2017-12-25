@@ -13,6 +13,7 @@
 #include "GetHtmlDlg.h"
 #include "SetWndDlg.h"
 #include "WebDownDlg.h"
+#include "CodingDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -75,6 +76,7 @@ BEGIN_MESSAGE_MAP(CToolsFairyDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON_GET_HTML_CONTENT, &CToolsFairyDlg::OnBnClickedButtonGetHtmlContent)
 	ON_BN_CLICKED(IDC_BUTTON_SET_WND, &CToolsFairyDlg::OnBnClickedButtonSetWnd)
 	ON_BN_CLICKED(IDC_BUTTON_WEB_DOWN, &CToolsFairyDlg::OnBnClickedButtonWebDown)
+	ON_BN_CLICKED(IDC_BUTTON_CODING, &CToolsFairyDlg::OnBnClickedButtonCoding)
 END_MESSAGE_MAP()
 
 
@@ -196,5 +198,13 @@ void CToolsFairyDlg::OnBnClickedButtonWebDown()
 {
 	CWebDownDlg* pWnd = new CWebDownDlg();
 	pWnd->Create(IDD_DIALOG_WEB_DOWN);
+	pWnd->ShowWindow(SW_SHOWNORMAL);
+}
+
+
+void CToolsFairyDlg::OnBnClickedButtonCoding()
+{
+	CCodingDlg* pWnd = new CCodingDlg();
+	pWnd->Create(IDD_DIALOG_CODING);
 	pWnd->ShowWindow(SW_SHOWNORMAL);
 }

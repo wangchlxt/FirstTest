@@ -108,6 +108,9 @@
     <ClInclude Include="ClipboardUtil.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="FileCrypto.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -180,6 +183,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="ClipboardUtil.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="FileCrypto.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

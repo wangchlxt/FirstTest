@@ -136,6 +136,7 @@
     <ClInclude Include="AESEncryptor.h" />
     <ClInclude Include="Base64Coding.h" />
     <ClInclude Include="ClipboardUtil.h" />
+    <ClInclude Include="FileCrypto.h" />
     <ClInclude Include="FileUtil.h" />
     <ClInclude Include="HardDisk.h" />
     <ClInclude Include="IBroadcastServer.h" />
@@ -167,6 +168,7 @@
     <ClCompile Include="AES.cpp" />
     <ClCompile Include="AESEncryptor.cpp" />
     <ClCompile Include="ClipboardUtil.cpp" />
+    <ClCompile Include="FileCrypto.cpp" />
     <ClCompile Include="FileUtil.cpp" />
     <ClCompile Include="HardDisk.cpp" />
     <ClCompile Include="Log.cpp" />

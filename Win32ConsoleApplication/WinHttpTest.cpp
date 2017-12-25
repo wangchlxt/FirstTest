@@ -126,3 +126,17 @@ void CWinHttpTest::Test()
 	delete[] szTmp;
 	szTmp = NULL;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

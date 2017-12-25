@@ -37,4 +37,5 @@ public:
 	CStatic m_cStaticMsg;
 	afx_msg void OnBnClickedButtonSetWnd();
 	afx_msg void OnBnClickedButtonWebDown();
+	afx_msg void OnBnClickedButtonCoding();
 };

@@ -192,6 +192,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppSet.h" />
+    <ClInclude Include="CodingDlg.h" />
     <ClInclude Include="GetHtmlDlg.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SetWndDlg.h" />
@@ -203,6 +204,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AppSet.cpp" />
+    <ClCompile Include="CodingDlg.cpp" />
     <ClCompile Include="GetHtmlDlg.cpp" />
     <ClCompile Include="SetWndDlg.cpp" />
     <ClCompile Include="stdafx.cpp">
