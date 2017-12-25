@@ -14,6 +14,7 @@
 #include "SetWndDlg.h"
 #include "WebDownDlg.h"
 #include "CodingDlg.h"
+#include "FileCryptoDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -77,6 +78,7 @@ BEGIN_MESSAGE_MAP(CToolsFairyDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON_SET_WND, &CToolsFairyDlg::OnBnClickedButtonSetWnd)
 	ON_BN_CLICKED(IDC_BUTTON_WEB_DOWN, &CToolsFairyDlg::OnBnClickedButtonWebDown)
 	ON_BN_CLICKED(IDC_BUTTON_CODING, &CToolsFairyDlg::OnBnClickedButtonCoding)
+	ON_BN_CLICKED(IDC_BUTTON_FILE_CRYPTO, &CToolsFairyDlg::OnBnClickedButtonFileCrypto)
 END_MESSAGE_MAP()
 
 
@@ -206,5 +208,13 @@ void CToolsFairyDlg::OnBnClickedButtonCoding()
 {
 	CCodingDlg* pWnd = new CCodingDlg();
 	pWnd->Create(IDD_DIALOG_CODING);
+	pWnd->ShowWindow(SW_SHOWNORMAL);
+}
+
+
+void CToolsFairyDlg::OnBnClickedButtonFileCrypto()
+{
+	CFileCryptoDlg* pWnd = new CFileCryptoDlg();
+	pWnd->Create(IDD_DIALOG_FILE_CRYPTO);
 	pWnd->ShowWindow(SW_SHOWNORMAL);
 }

@@ -193,6 +193,7 @@
   <ItemGroup>
     <ClInclude Include="AppSet.h" />
     <ClInclude Include="CodingDlg.h" />
+    <ClInclude Include="FileCryptoDlg.h" />
     <ClInclude Include="GetHtmlDlg.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SetWndDlg.h" />
@@ -205,6 +206,7 @@
   <ItemGroup>
     <ClCompile Include="AppSet.cpp" />
     <ClCompile Include="CodingDlg.cpp" />
+    <ClCompile Include="FileCryptoDlg.cpp" />
     <ClCompile Include="GetHtmlDlg.cpp" />
     <ClCompile Include="SetWndDlg.cpp" />
     <ClCompile Include="stdafx.cpp">
