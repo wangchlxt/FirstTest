@@ -32,4 +32,7 @@ public:
 	CMFCEditBrowseCtrl m_cMfcEditBrowserFile;
 	afx_msg void OnBnClickedButtonEncodeText();
 	afx_msg void OnBnClickedButtonEncodeFile();
+	afx_msg void OnBnClickedButtonMd5Encode();
+	afx_msg void OnBnClickedButtonMd5Decode();
+	afx_msg void OnBnClickedButtonFileMd5();
 };

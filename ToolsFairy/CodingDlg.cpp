@@ -6,6 +6,7 @@
 #include "CodingDlg.h"
 #include "afxdialogex.h"
 #include "AESEncryptor.h"
+#include "MD5.h"
 
 using namespace std;
 
@@ -39,6 +40,9 @@ BEGIN_MESSAGE_MAP(CCodingDlg, CDialogEx)
 ON_BN_CLICKED(IDC_BUTTON_PROCESS_CODE_FILE, &CCodingDlg::OnBnClickedButtonProcessCodeFile)
 ON_BN_CLICKED(IDC_BUTTON_ENCODE_TEXT, &CCodingDlg::OnBnClickedButtonEncodeText)
 ON_BN_CLICKED(IDC_BUTTON_ENCODE_FILE, &CCodingDlg::OnBnClickedButtonEncodeFile)
+ON_BN_CLICKED(IDC_BUTTON_MD5_ENCODE, &CCodingDlg::OnBnClickedButtonMd5Encode)
+ON_BN_CLICKED(IDC_BUTTON_MD5_DECODE, &CCodingDlg::OnBnClickedButtonMd5Decode)
+ON_BN_CLICKED(IDC_BUTTON_FILE_MD5, &CCodingDlg::OnBnClickedButtonFileMd5)
 END_MESSAGE_MAP()
 
 
@@ -135,4 +139,77 @@ void CCodingDlg::OnBnClickedButtonEncodeFile()
 
 	CAESEncryptor aes((unsigned char*)pwda.GetBuffer());
 	aes.EncryptTxtFile(filea, filea + ".mi");
+}
+
+
+void CCodingDlg::OnBnClickedButtonMd5Encode()
+{
+	CString in;
+	m_cEditTextIn.GetWindowTextW(in);
+
+	string txt = CW2A(in);
+
+	MD5 md5;
+	md5.reset();
+	md5.update(txt);
+
+	CString out = CA2W(md5.toString().c_str());
+	m_cEditTextOut.SetWindowTextW(out.MakeUpper());
+}
+
+
+void CCodingDlg::OnBnClickedButtonMd5Decode()
+{
+	
+}
+
+
+void CCodingDlg::OnBnClickedButtonFileMd5()
+{
+	CString file;
+	m_cMfcEditBrowserFile.GetWindowTextW(file);
+	if (file.IsEmpty())
+	{
+		MessageBox(_T("请选择文件"));
+		return;
+	}
+
+	const int READ_BUF_SIZE = 1024;
+	MD5 md5;
+	md5.reset();
+
+	int uReadSize = 0;
+	char szReadBuf[READ_BUF_SIZE] = "";
+	unsigned int uRetCRCValue = 0;
+	TCHAR* pszTest = file.GetBuffer(MAX_PATH);
+
+	//文件大小
+	int nFileSize = 0;
+	FILE *pFile;
+	_wfopen_s(&pFile, pszTest, _T("rb"));
+
+	if (pFile == NULL)
+	{
+		MessageBox(_T("文件打开失败"));
+		return;
+	}
+
+	while (TRUE)
+	{
+		::ZeroMemory(szReadBuf, sizeof(szReadBuf) * sizeof(char));
+		uReadSize = (int)fread(szReadBuf, sizeof(char), READ_BUF_SIZE, pFile);
+
+		if (uReadSize == 0)
+		{
+			break;
+		}
+
+		md5.update(szReadBuf, uReadSize);
+		nFileSize += uReadSize;
+	}
+
+	CString strmd5(md5.toString().c_str());
+	m_cEditTextOut.SetWindowTextW(strmd5.MakeUpper());
+
+	fclose(pFile);
 }

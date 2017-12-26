@@ -9,5 +9,6 @@ public:
 
 	void TestWait();
 	void TestExecutionOrder();
+	void TestOtherClassFunction();
 };
 

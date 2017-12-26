@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "ThreadPoolTest.h"
+#include "Task.h"
+
 #include <iostream>
 #include <boost\bind.hpp>
 #include <boost\threadpool.hpp>
@@ -40,7 +42,10 @@ void task_with_parameter(int value, string str)
 
 void CThreadPoolTest::Test()
 {
-	TestExecutionOrder();
+	//TestWait();
+	//TestExecutionOrder();
+	TestOtherClassFunction();
+
 	cout << "º¯ÊýÍË³ö" << endl;
 }
 
@@ -84,4 +89,20 @@ void CThreadPoolTest::TestExecutionOrder()
 	}
 
 	cout << "TestExecutionOrder bottom" << endl;
+}
+
+void other_class_funciton(int idx)
+{
+	CTask task;
+	task.PrintTime(idx);
+}
+
+void CThreadPoolTest::TestOtherClassFunction()
+{
+	pool tp(5);
+
+	for (int i = 0;i < 30;++i)
+	{
+		tp.schedule(boost::bind(other_class_funciton, i));
+	}
 }
