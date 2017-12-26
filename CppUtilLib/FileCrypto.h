@@ -2,15 +2,18 @@
 #include <string>
 using namespace std;
 
-// 文件加密解密
-class CFileCrypyo
+// 文件加密解密-对等加密
+class CFileCrypto
 {
 public:
-	CFileCrypyo();
-	~CFileCrypyo();
+	CFileCrypto();
+	~CFileCrypto();
 	
-	bool DesFile(string sourceFile, string targetFile);//解密文件
-	bool MakePsw();//标准化密码
+	// 文件对等加密解密
+	bool DesFile(string sourceFile, string targetFile);
+
+	//标准化密码
+	bool MakePsw();
 	char FixByte(char SourceByte,int pswN);
 
 

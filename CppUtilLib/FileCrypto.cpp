@@ -4,17 +4,17 @@
 #include <iostream>
 #define BLOCK_SIZE 4096 //设置读写缓存块大小为 4K
 
-CFileCrypyo::CFileCrypyo()
+CFileCrypto::CFileCrypto()
 {
 }
 
 
-CFileCrypyo::~CFileCrypyo()
+CFileCrypto::~CFileCrypto()
 {
 }
 
 //解密文件
-bool CFileCrypyo::DesFile(string sourceFile,string targetFile)
+bool CFileCrypto::DesFile(string sourceFile,string targetFile)
 {
 	MakePsw();
 	ifstream fin(sourceFile.c_str(),ios::binary);
@@ -39,7 +39,7 @@ bool CFileCrypyo::DesFile(string sourceFile,string targetFile)
 	return true;
 }
 
-char CFileCrypyo::FixByte(char SourceByte,int pswN)
+char CFileCrypto::FixByte(char SourceByte,int pswN)
 {
 	if(pswN >= 16)
 	{
@@ -49,7 +49,7 @@ char CFileCrypyo::FixByte(char SourceByte,int pswN)
 }
 
 //格式化密码
-bool CFileCrypyo::MakePsw()
+bool CFileCrypto::MakePsw()
 {
 	string iWord = m_strPassword;
 	char p[17] = {'\0'};

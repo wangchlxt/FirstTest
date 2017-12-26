@@ -56,7 +56,7 @@ void CFileCryptoDlg::OnBnClickedButtonCrypto()
 	string oldFile = CW2A(file);
 	string newFile = CW2A(targetFile);
 
-	CFileCrypyo fileCrypto;
+	CFileCrypto fileCrypto;
 	fileCrypto.m_strPassword = CW2A(pwd);
 	if(fileCrypto.DesFile(oldFile, newFile))
 	{
