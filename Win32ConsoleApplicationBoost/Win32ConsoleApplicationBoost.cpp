@@ -9,9 +9,13 @@ using namespace std;
 #include "RegexTest.h"
 #include "AsioTest.h"
 #include "AsioTcpTest.h"
+#include "ThreadPoolTest.h"
 
 int main()
 {
+	CThreadPoolTest threadPoolTest;
+	threadPoolTest.Test();
+
 	/*CThreadTest threadTest;
 	threadTest.Test();*/
 
@@ -21,8 +25,8 @@ int main()
 	/*CAsioTest asioTest;
 	asioTest.Test();*/
 
-	CAsioTcpTest asioTcpTest;
-	asioTcpTest.Test("");
+	/*CAsioTcpTest asioTcpTest;
+	asioTcpTest.Test("");*/
 
 	system("pause");
     return 0;
