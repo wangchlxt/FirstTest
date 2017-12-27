@@ -72,6 +72,12 @@
     <ClInclude Include="StringTest.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="LogTest.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="LogUtil.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -120,6 +126,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="StringTest.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="LogTest.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="LogUtil.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

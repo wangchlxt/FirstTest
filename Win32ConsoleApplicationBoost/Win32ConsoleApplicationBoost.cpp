@@ -11,9 +11,13 @@ using namespace std;
 #include "AsioTcpTest.h"
 #include "ThreadPoolTest.h"
 #include "StringTest.h"
+#include "LogTest.h"
 
 int main()
 {
+	CLogTest logTest;
+	logTest.Test();
+
 	/*CStringTest stringTest;
 	stringTest.Test();*/
 
@@ -23,8 +27,8 @@ int main()
 	/*CThreadTest threadTest;
 	threadTest.Test();*/
 
-	CRegexTest regexTest;
-	regexTest.Test();
+	/*CRegexTest regexTest;
+	regexTest.Test();*/
 
 	/*CAsioTest asioTest;
 	asioTest.Test();*/

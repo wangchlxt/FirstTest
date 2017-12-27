@@ -164,6 +164,8 @@
     <ClInclude Include="asio\cpp11\http\server\request_handler.hpp" />
     <ClInclude Include="asio\cpp11\http\server\request_parser.hpp" />
     <ClInclude Include="asio\cpp11\http\server\server.hpp" />
+    <ClInclude Include="LogTest.h" />
+    <ClInclude Include="LogUtil.h" />
     <ClInclude Include="RegexTest.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="StringTest.h" />
@@ -182,6 +184,8 @@
     <ClCompile Include="asio\cpp11\http\server\request_handler.cpp" />
     <ClCompile Include="asio\cpp11\http\server\request_parser.cpp" />
     <ClCompile Include="asio\cpp11\http\server\server.cpp" />
+    <ClCompile Include="LogTest.cpp" />
+    <ClCompile Include="LogUtil.cpp" />
     <ClCompile Include="RegexTest.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
