@@ -151,6 +151,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AtlStringTest.h" />
     <ClInclude Include="DeskTest.h" />
     <ClInclude Include="MapTest.h" />
     <ClInclude Include="PortTest.h" />
@@ -163,6 +164,7 @@
     <ClInclude Include="WinHttpTest.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AtlStringTest.cpp" />
     <ClCompile Include="DeskTest.cpp" />
     <ClCompile Include="MapTest.cpp" />
     <ClCompile Include="PortTest.cpp" />

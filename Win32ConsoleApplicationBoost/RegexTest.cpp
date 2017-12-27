@@ -18,9 +18,10 @@ CRegexTest::~CRegexTest()
 
 void CRegexTest::Test()
 {
-	Test_regex_match();
+	/*Test_regex_match();
 	Test_regex_search();
-	Test_regex_replace();
+	Test_regex_replace();*/
+	Test_regex_split();
 }
 
 // regex_match() 函数，当整个字符串完全匹配正则表达式时，返回 true，否则返回 false
@@ -90,3 +91,24 @@ void CRegexTest::Test_regex_replace()
 
 	cout << newTxt << endl;
 }
+
+void CRegexTest::Test_regex_split()
+{
+	string flx = "QRequestBlock";
+	string txt = "QRequestBlock^^1,10,19,22,25,77,90";
+	string head = txt.substr(0, flx.length() + 2);
+	cout << head << endl;
+
+	txt.replace(0, head.length(), "");
+	cout << txt << endl;
+
+	list<string> listIds;
+	regex reg(",",boost::regbase::normal | boost::regbase::icase);
+	regex_split(back_inserter(listIds), txt, reg);
+
+	for (list<string>::iterator it = listIds.begin();it != listIds.end();it++)
+	{
+		cout << *it << endl;
+	}
+}
+

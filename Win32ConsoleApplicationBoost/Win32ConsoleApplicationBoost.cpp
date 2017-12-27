@@ -10,17 +10,21 @@ using namespace std;
 #include "AsioTest.h"
 #include "AsioTcpTest.h"
 #include "ThreadPoolTest.h"
+#include "StringTest.h"
 
 int main()
 {
-	CThreadPoolTest threadPoolTest;
-	threadPoolTest.Test();
+	/*CStringTest stringTest;
+	stringTest.Test();*/
+
+	/*CThreadPoolTest threadPoolTest;
+	threadPoolTest.Test();*/
 
 	/*CThreadTest threadTest;
 	threadTest.Test();*/
 
-	/*CRegexTest regexTest;
-	regexTest.Test();*/
+	CRegexTest regexTest;
+	regexTest.Test();
 
 	/*CAsioTest asioTest;
 	asioTest.Test();*/

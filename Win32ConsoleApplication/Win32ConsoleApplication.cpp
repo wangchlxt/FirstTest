@@ -10,14 +10,18 @@
 #include "PortTest.h"
 #include "StrTest.h"
 #include "WinHttpTest.h"
+#include "AtlStringTest.h"
 
 #include <iostream>
 using namespace std;
 
 int main()
 {
-	CWinHttpTest winHttpTest;
-	winHttpTest.Test();
+	CAtlStringTest atlStringTest;
+	atlStringTest.Test();
+
+	/*CWinHttpTest winHttpTest;
+	winHttpTest.Test();*/
 
 	/*CStrTest str;
 	str.Test();*/

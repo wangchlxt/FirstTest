@@ -9,5 +9,6 @@ public:
 	void Test_regex_match();
 	void Test_regex_search();
 	void Test_regex_replace();
+	void Test_regex_split();
 };
 
