@@ -12,11 +12,15 @@ using namespace std;
 #include "ThreadPoolTest.h"
 #include "StringTest.h"
 #include "LogTest.h"
+#include "UdpServerTest.h"
 
 int main()
 {
-	CLogTest logTest;
-	logTest.Test();
+	CUdpServerTest udpServerTest;
+	udpServerTest.Test();
+
+	/*CLogTest logTest;
+	logTest.Test();*/
 
 	/*CStringTest stringTest;
 	stringTest.Test();*/

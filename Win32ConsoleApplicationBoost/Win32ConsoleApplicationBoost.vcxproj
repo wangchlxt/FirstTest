@@ -173,6 +173,7 @@
     <ClInclude Include="Task.h" />
     <ClInclude Include="ThreadPoolTest.h" />
     <ClInclude Include="ThreadTest.h" />
+    <ClInclude Include="UdpServerTest.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AsioTcpTest.cpp" />
@@ -197,6 +198,7 @@
     <ClCompile Include="Task.cpp" />
     <ClCompile Include="ThreadPoolTest.cpp" />
     <ClCompile Include="ThreadTest.cpp" />
+    <ClCompile Include="UdpServerTest.cpp" />
     <ClCompile Include="Win32ConsoleApplicationBoost.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

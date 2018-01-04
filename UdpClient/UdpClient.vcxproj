@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{7B1341A1-BB79-40C5-A83E-85CEFC64C321}</ProjectGuid>
+    <ProjectGuid>{0118203C-BCC5-4BC5-BDBE-BD5D52CFC752}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>UdpServer</RootNamespace>
+    <RootNamespace>UdpClient</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -157,7 +157,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="UdpServer.cpp" />
+    <ClCompile Include="UdpClient.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
