@@ -6,5 +6,8 @@ public:
 	~CTimeTest();
 
 	void Test();
+
+	void TestTime();
+	void TestTimeString();
 };
 

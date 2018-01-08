@@ -17,8 +17,8 @@ using namespace std;
 
 int main()
 {
-	CAtlStringTest atlStringTest;
-	atlStringTest.Test();
+	/*CAtlStringTest atlStringTest;
+	atlStringTest.Test();*/
 
 	/*CWinHttpTest winHttpTest;
 	winHttpTest.Test();*/
@@ -41,8 +41,8 @@ int main()
 	auto s = "abc";
 	cout << s << endl;*/
 
-	/*CTimeTest timeTest;
-	timeTest.Test();*/
+	CTimeTest timeTest;
+	timeTest.Test();
 
 	/*CMapTest mapTest;
 	mapTest.Test();*/
