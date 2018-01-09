@@ -160,7 +160,9 @@
     <ClInclude Include="StrTest.h" />
     <ClInclude Include="SystemTest.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="ThreadTest2.h" />
     <ClInclude Include="TimeTest.h" />
+    <ClInclude Include="TryTest.h" />
     <ClInclude Include="WinHttpTest.h" />
   </ItemGroup>
   <ItemGroup>
@@ -177,7 +179,9 @@
     <ClCompile Include="StdThreadTest.cpp" />
     <ClCompile Include="StrTest.cpp" />
     <ClCompile Include="SystemTest.cpp" />
+    <ClCompile Include="ThreadTest2.cpp" />
     <ClCompile Include="TimeTest.cpp" />
+    <ClCompile Include="TryTest.cpp" />
     <ClCompile Include="Win32ConsoleApplication.cpp" />
     <ClCompile Include="WinHttpTest.cpp" />
   </ItemGroup>

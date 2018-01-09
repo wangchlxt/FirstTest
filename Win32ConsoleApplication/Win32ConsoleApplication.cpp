@@ -11,12 +11,20 @@
 #include "StrTest.h"
 #include "WinHttpTest.h"
 #include "AtlStringTest.h"
+#include "ThreadTest2.h"
+#include "TryTest.h"
 
 #include <iostream>
 using namespace std;
 
 int main()
 {
+	CTryTest tryTest;
+	tryTest.Test();
+
+	/*CThreadTest2 threadTest2;
+	threadTest2.Test();*/
+
 	/*CAtlStringTest atlStringTest;
 	atlStringTest.Test();*/
 
@@ -41,8 +49,8 @@ int main()
 	auto s = "abc";
 	cout << s << endl;*/
 
-	CTimeTest timeTest;
-	timeTest.Test();
+	/*CTimeTest timeTest;
+	timeTest.Test();*/
 
 	/*CMapTest mapTest;
 	mapTest.Test();*/
