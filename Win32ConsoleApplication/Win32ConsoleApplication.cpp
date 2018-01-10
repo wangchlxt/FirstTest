@@ -19,11 +19,11 @@ using namespace std;
 
 int main()
 {
-	CTryTest tryTest;
-	tryTest.Test();
+	/*CTryTest tryTest;
+	tryTest.Test();*/
 
-	/*CThreadTest2 threadTest2;
-	threadTest2.Test();*/
+	CThreadTest2 threadTest2;
+	threadTest2.Test();
 
 	/*CAtlStringTest atlStringTest;
 	atlStringTest.Test();*/

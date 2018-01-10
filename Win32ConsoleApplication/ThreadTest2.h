@@ -7,6 +7,12 @@ public:
 
 	void Test();
 
-	void WaitForMultipleObjectsTest();
+	void TestWaitForMultipleObjects();
+	void TestEvent();
+	void TestEvent2();
+
+public:
+	HANDLE m_hEvent;
+	HANDLE m_hEvent2;
 };
 
