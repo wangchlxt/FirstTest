@@ -30,7 +30,8 @@ void CThreadTest2::Test()
 {
 	//TestWaitForMultipleObjects();
 	//TestEvent();
-	TestEvent2();
+	//TestEvent2();
+	TestMutex();
 }
 
 void CThreadTest2::TestWaitForMultipleObjects()
@@ -44,6 +45,7 @@ void CThreadTest2::TestWaitForMultipleObjects()
 	cout << "exec thread end" << endl;
 }
 
+/**************************************************************************************************************************************/
 
 UINT __stdcall TestEventThread(LPVOID lpParam)
 {
@@ -100,3 +102,47 @@ void CThreadTest2::TestEvent2()
 	cout << "Event end" << endl;
 }
 
+/**************************************************************************************************************************************/
+
+UINT __stdcall TestMutexThread1(LPVOID lpParam)
+{
+	CThreadTest2* pThis = (CThreadTest2*)lpParam;
+	
+	WaitForSingleObject(pThis->m_hMutex, INFINITE);
+	cout << "进入 TestMutexThread1" << endl;
+
+	Sleep(6000);
+	ReleaseMutex(pThis->m_hMutex);
+
+	cout << "退出 TestMutexThread1" << endl;
+	return 0;
+}
+
+UINT __stdcall TestMutexThread2(LPVOID lpParam)
+{
+	CThreadTest2* pThis = (CThreadTest2*)lpParam;
+	
+	WaitForSingleObject(pThis->m_hMutex, INFINITE);
+	cout << "进入 TestMutexThread2" << endl;
+
+	Sleep(3000);
+	ReleaseMutex(pThis->m_hMutex);
+
+	cout << "退出 TestMutexThread2" << endl;
+	return 0;
+}
+
+/*
+ mutex 和 event 不同，不需要 ReleaseMutex，CloseHandle 后，WaitForSingleObject 不在阻塞
+*/
+void CThreadTest2::TestMutex()
+{
+	m_hMutex = CreateMutex(NULL, FALSE, NULL);
+
+	UINT tid = 0;
+	_beginthreadex(NULL, 0, TestMutexThread1, this, 0, &tid);
+	_beginthreadex(NULL, 0, TestMutexThread2, this, 0, &tid);
+
+	CloseHandle(m_hMutex);
+	m_hMutex = NULL;
+}
