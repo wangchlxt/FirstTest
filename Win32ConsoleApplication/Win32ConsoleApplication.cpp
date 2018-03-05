@@ -13,17 +13,21 @@
 #include "AtlStringTest.h"
 #include "ThreadTest2.h"
 #include "TryTest.h"
+#include "RandTest.h"
 
 #include <iostream>
 using namespace std;
 
 int main()
 {
+	CRandTest randTest;
+	randTest.Test();
+
 	/*CTryTest tryTest;
 	tryTest.Test();*/
 
-	CThreadTest2 threadTest2;
-	threadTest2.Test();
+	/*CThreadTest2 threadTest2;
+	threadTest2.Test();*/
 
 	/*CAtlStringTest atlStringTest;
 	atlStringTest.Test();*/

@@ -16,8 +16,8 @@ CTimeTest::~CTimeTest()
 
 void CTimeTest::Test()
 {
-	TestTime();
-	//TestTimeString();
+	//TestTime();
+	TestTimeString();
 }
 
 
@@ -75,6 +75,8 @@ void CTimeTest::TestTimeString()
 		// GetSystemTime() 精度到 3 位毫秒
 		SYSTEMTIME m_time;
 		GetSystemTime(&m_time);
+
+		
 
 		CAtlStringA strTime;
 		strTime.Format("%d%.02d%.02d%.02d%.02d%.02d%.03d", m_time.wYear, m_time.wMonth, m_time.wDay, m_time.wHour + 8, m_time.wMinute, m_time.wSecond, m_time.wMilliseconds);

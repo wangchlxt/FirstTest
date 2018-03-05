@@ -155,6 +155,7 @@
     <ClInclude Include="DeskTest.h" />
     <ClInclude Include="MapTest.h" />
     <ClInclude Include="PortTest.h" />
+    <ClInclude Include="RandTest.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="StdThreadTest.h" />
     <ClInclude Include="StrTest.h" />
@@ -170,6 +171,7 @@
     <ClCompile Include="DeskTest.cpp" />
     <ClCompile Include="MapTest.cpp" />
     <ClCompile Include="PortTest.cpp" />
+    <ClCompile Include="RandTest.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

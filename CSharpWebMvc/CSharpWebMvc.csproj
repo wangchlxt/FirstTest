@@ -342,6 +342,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Html\BrowserVersion.html" />
     <Content Include="Html\EspruinoUG96\UG96.js" />
     <Content Include="Html\JSTest.html" />
     <Content Include="Html\测试数字.html" />
